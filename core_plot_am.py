@@ -42,7 +42,7 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
 
     #Eliminamos las curvas mas chicas del mapa
     A = S
-    valor_umbral = 0.05 * np.max(S)
+    valor_umbral = 0.001 * np.max(S)
     A[A < valor_umbral] = 0
     #Eliminamos los bordes
     for i in range(0,Dxx):
@@ -123,9 +123,7 @@ def PlotT1D_D(Daxis, D, S, pwd, alpha, Dmin, Dmax):
     #fig.set_size_inches(10/2.54, 10/2.54)    
     # Projected T2 distribution
     projD = np.sum(S, axis=0)
-# =============================================================================
-#     projD = projD / np.max(projD)
-# =============================================================================
+    projD = projD / np.max(projD)
     #Calculo los peaks
     peaks2, _ = find_peaks(projD, height=0.025, distance = 5)
     peaks2x, peaks2y = D[peaks2], projD[peaks2]
@@ -139,9 +137,7 @@ def PlotT1D_D(Daxis, D, S, pwd, alpha, Dmin, Dmax):
                           fontsize=10, ha = 'center')
     axs.set_xlabel(r'$D$ [10$^{-9}$ m$^{2}$/s]')
     axs.set_xscale('log')
-# =============================================================================
-#     axs.set_ylim(-0.02, 1.2)
-# =============================================================================
+    axs.set_ylim(-0.02, 1.2)
     axs.set_xlim(10.0**Dmin, 10.0**Dmax)
     #calculo comulativos
     cumD = np.cumsum(projD)
@@ -153,7 +149,37 @@ def PlotT1D_D(Daxis, D, S, pwd, alpha, Dmin, Dmax):
     plt.savefig(pwd+"Diff_1D", dpi=300)
     plt.show()
     
+def PlotT1D_D_NoNorm(Daxis, D, S, pwd, alpha, Dmin, Dmax):
 
+    fig, axs = plt.subplots()
+    #fig.set_size_inches(10/2.54, 10/2.54)    
+    # Projected T2 distribution
+    projD = np.sum(S, axis=0)
+    #projD = projD / np.max(projD)
+    #Calculo los peaks
+    peaks2, _ = find_peaks(projD, height=0.025, distance = 5)
+    peaks2x, peaks2y = D[peaks2], projD[peaks2]
+    # grafico los peaks
+    axs.plot(D, projD, label = 'Distrib.', color = 'teal')
+    for i in range(len(peaks2x)):
+        axs.plot(peaks2x[i], peaks2y[i] * 1.05, lw = 0.2, marker=2, 
+                      color='black')
+        axs.annotate(f'{peaks2x[i]:.2f}', 
+                          xy = (peaks2x[i], peaks2y[i] * 1.07), 
+                          fontsize=10, ha = 'center')
+    axs.set_xlabel(r'$D$ [10$^{-9}$ m$^{2}$/s]')
+    axs.set_xscale('log')
+    axs.set_ylim(-0.001, 1.2*np.max(projD))
+    axs.set_xlim(10.0**Dmin, 10.0**Dmax)
+    #calculo comulativos
+    cumD = np.cumsum(projD)
+    cumD /= cumD[-1]
+    ax = axs.twinx()
+    ax.plot(D, cumD, label = 'Cumul.', color = 'coral')
+    ax.set_ylim(-0.02, 1.2)
+    #ax.set_aspect('equal', adjustable='datalim')    
+    plt.savefig(pwd+"Diff_1D", dpi=300)
+    plt.show()
 
 def PlotT1D_T1(T1axis,T1, S, pwd, alpha, T1min, T1max):
     
@@ -186,6 +212,37 @@ def PlotT1D_T1(T1axis,T1, S, pwd, alpha, T1min, T1max):
     plt.savefig(pwd+"T1_1D", dpi=300)
     plt.show()
     
+    
+def PlotT1D_T1_NoNorm(T1axis,T1, S, pwd, alpha, T1min, T1max):
+    
+    fig, axs = plt.subplots()
+    #fig.set_size_inches(10/2.54, 10/2.54)
+    projT1 = np.sum(S, axis=1)
+    #projT1 = projT1 / np.max(projT1)
+    peaks1, _ = find_peaks(projT1, height=0.025, distance = 5)
+    peaks1x, peaks1y = T1[peaks1], projT1[peaks1]
+    
+    
+    axs.plot(T1, projT1, label = 'Distrib.', color = 'teal')
+    for i in range(len(peaks1x)):
+        axs.plot(peaks1x[i], peaks1y[i]*1.05, lw = 0, marker=11, 
+                      color='black')
+        axs.annotate(f'{peaks1x[i]:.2f}', 
+                          xy = (peaks1x[i], peaks1y[i]*1.07), 
+                          fontsize=10, ha = 'center')
+    axs.set_xlabel(r'$T_1$ [ms]')
+    axs.set_xscale('log')
+    axs.set_ylim(-0.001, 1.2*np.max(projT1))
+    axs.set_xlim(10.0**T1min, 10.0**T1max)
+    
+    cumT1 = np.cumsum(projT1)
+    cumT1 /= cumT1[-1]
+    ax = axs.twinx()
+    ax.plot(T1, cumT1, label = 'Cumul.', color = 'coral')
+    ax.set_ylim(-0.02, 1.2)
+    #ax.set_aspect('equal', adjustable='datalim')
+    plt.savefig(pwd+"T1_1D", dpi=300)
+    plt.show()
 
 def PlotDT2_T2(T2axis,T2, S, pwd, alpha, T2min, T2max):
     
@@ -207,6 +264,37 @@ def PlotDT2_T2(T2axis,T2, S, pwd, alpha, T2min, T2max):
     axs.set_xlabel(r'$T_2$ [ms]')
     axs.set_xscale('log')
     axs.set_ylim(-0.02, 1.2)
+    axs.set_xlim(10.0**T2min, 10.0**T2max)
+    
+    cumT2 = np.cumsum(projT2)
+    cumT2 /= cumT2[-1]
+    ax = axs.twinx()
+    ax.plot(T2, cumT2, label = 'Cumul.', color = 'coral')
+    ax.set_ylim(-0.02, 1.2)
+    #ax.set_aspect('equal', adjustable='datalim')
+    plt.savefig(pwd+"T2_1D", dpi=300)
+    plt.show()
+
+def PlotDT2_T2_NoNorm(T2axis,T2, S, pwd, alpha, T2min, T2max):
+    
+    fig, axs = plt.subplots()
+    #fig.set_size_inches(10/2.54, 10/2.54)
+    projT2 = np.sum(S, axis=0)
+    #projT2 = projT2 / np.max(projT2)
+    peaks1, _ = find_peaks(projT2, height=0.025, distance = 5)
+    peaks1x, peaks1y = T2[peaks1], projT2[peaks1]
+    
+    
+    axs.plot(T2, projT2, label = 'Distrib.', color = 'teal')
+    for i in range(len(peaks1x)):
+        axs.plot(peaks1x[i], peaks1y[i] * 1.05, lw = 0, marker=11, 
+                      color='black')
+        axs.annotate(f'{peaks1x[i]:.2f}', 
+                          xy = (peaks1x[i], peaks1y[i] * 1.07), 
+                          fontsize=10, ha = 'center')
+    axs.set_xlabel(r'$T_2$ [ms]')
+    axs.set_xscale('log')
+    axs.set_ylim(-0.001, 1.2*np.max(projT2))
     axs.set_xlim(10.0**T2min, 10.0**T2max)
     
     cumT2 = np.cumsum(projT2)

@@ -5,7 +5,7 @@ import pandas as pd
 
 
 #Carpeta con las mediciones
-pwd = ('C:/Users/Andres/Documents/Andres/Codigos/231017/Pruebas/Heptano/T1D/')
+pwd = ('G:/Unidades compartidas/TF-Andres/Mediciones/Heptano_Bentheimer/231010_mojado/231010_T1D_8x8_10min/2/')
 #Leemos los archivos necesarios:
 param = IO.read_acq(pwd)
 Z, T1axis, Daxis = IO.read_T1D(pwd)
@@ -14,8 +14,8 @@ Z, T1axis, Daxis = IO.read_T1D(pwd)
 
 nT1, nD = len(T1axis), len(Daxis)
 
-alpha = 0.1
-T1min, T1max = 2, 4.5
+alpha = 0.001
+T1min, T1max = 2, 4
 Dmin, Dmax = -1, 1
 T1xx = 4
 Dxx = 4
@@ -48,10 +48,10 @@ VectorD.to_csv(pwd+"VectorD.txt", index=False, header=False)
 #Graficos
 
 graph.MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd, alpha, T1min, T1max, Dmin, Dmax, T1xx, Dxx)
-graph.PlotT1D_D(Daxis, D, S, pwd, alpha, Dmin, Dmax)
-graph.PlotT1D_T1(T1axis, T1, S, pwd, alpha, T1min, T1max)
-
-    
+#graph.PlotT1D_D(Daxis, D, S, pwd, alpha, Dmin, Dmax)
+#graph.PlotT1D_T1(T1axis, T1, S, pwd, alpha, T1min, T1max)
+graph.PlotT1D_T1_NoNorm(T1axis, T1, S, pwd, alpha, T1min, T1max)
+graph.PlotT1D_D_NoNorm(Daxis, D, S, pwd, alpha, Dmin, Dmax)
 # CODIGO CHEVA
 
 # =============================================================================
