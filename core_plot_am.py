@@ -178,7 +178,7 @@ def PlotT1D_D_NoNorm(Daxis, D, S, pwd, alpha, Dmin, Dmax):
     ax.plot(D, cumD, label = 'Cumul.', color = 'coral')
     ax.set_ylim(-0.02, 1.2)
     #ax.set_aspect('equal', adjustable='datalim')    
-    plt.savefig(pwd+"Diff_1D", dpi=300)
+    plt.savefig(pwd+"Diff_1D_NoNorm", dpi=300)
     plt.show()
 
 def PlotT1D_T1(T1axis,T1, S, pwd, alpha, T1min, T1max):
@@ -241,7 +241,7 @@ def PlotT1D_T1_NoNorm(T1axis,T1, S, pwd, alpha, T1min, T1max):
     ax.plot(T1, cumT1, label = 'Cumul.', color = 'coral')
     ax.set_ylim(-0.02, 1.2)
     #ax.set_aspect('equal', adjustable='datalim')
-    plt.savefig(pwd+"T1_1D", dpi=300)
+    plt.savefig(pwd+"T1_1D_NoNorm", dpi=300)
     plt.show()
 
 def PlotDT2_T2(T2axis,T2, S, pwd, alpha, T2min, T2max):
@@ -303,7 +303,7 @@ def PlotDT2_T2_NoNorm(T2axis,T2, S, pwd, alpha, T2min, T2max):
     ax.plot(T2, cumT2, label = 'Cumul.', color = 'coral')
     ax.set_ylim(-0.02, 1.2)
     #ax.set_aspect('equal', adjustable='datalim')
-    plt.savefig(pwd+"T2_1D", dpi=300)
+    plt.savefig(pwd+"T2_1D_NoNorm", dpi=300)
     plt.show()
 
     
