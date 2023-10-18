@@ -157,7 +157,7 @@ def PlotT1D_D_NoNorm(Daxis, D, S, pwd, alpha, Dmin, Dmax):
     projD = np.sum(S, axis=0)
     #projD = projD / np.max(projD)
     #Calculo los peaks
-    peaks2, _ = find_peaks(projD, height=0.025, distance = 5)
+    peaks2, _ = find_peaks(projD, height=0.005, distance = 5)
     peaks2x, peaks2y = D[peaks2], projD[peaks2]
     # grafico los peaks
     axs.plot(D, projD, label = 'Distrib.', color = 'teal')
@@ -219,7 +219,7 @@ def PlotT1D_T1_NoNorm(T1axis,T1, S, pwd, alpha, T1min, T1max):
     #fig.set_size_inches(10/2.54, 10/2.54)
     projT1 = np.sum(S, axis=1)
     #projT1 = projT1 / np.max(projT1)
-    peaks1, _ = find_peaks(projT1, height=0.025, distance = 5)
+    peaks1, _ = find_peaks(projT1, height=0.005, distance = 5)
     peaks1x, peaks1y = T1[peaks1], projT1[peaks1]
     
     
@@ -281,7 +281,7 @@ def PlotDT2_T2_NoNorm(T2axis,T2, S, pwd, alpha, T2min, T2max):
     #fig.set_size_inches(10/2.54, 10/2.54)
     projT2 = np.sum(S, axis=0)
     #projT2 = projT2 / np.max(projT2)
-    peaks1, _ = find_peaks(projT2, height=0.025, distance = 5)
+    peaks1, _ = find_peaks(projT2, height=0.005, distance = 5)
     peaks1x, peaks1y = T2[peaks1], projT2[peaks1]
     
     
