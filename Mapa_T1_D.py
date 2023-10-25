@@ -5,7 +5,7 @@ import pandas as pd
 
 
 #Carpeta con las mediciones
-pwd = ('G:/Unidades compartidas/TF-Andres/Mediciones/Dodecano_Bentheimer/Dodecano_Bentheimer/231002/Mojado_Agua/1659/231002_T1D/1/')
+pwd = ('G:/Unidades compartidas/TF-Andres/Mediciones/Agua_Bentheimer/230904/230904_T1D/2/')
 #Leemos los archivos necesarios:
 param = IO.read_acq(pwd)
 Z, T1axis, Daxis = IO.read_T1D(pwd)
@@ -15,8 +15,8 @@ Z, T1axis, Daxis = IO.read_T1D(pwd)
 nT1, nD = len(T1axis), len(Daxis)
 
 alpha = 0.001
-T1min, T1max = 2, 4
-Dmin, Dmax = -1, 1
+T1min, T1max = 0, 7/2
+Dmin, Dmax = -1/2, 1/2
 T1xx = 10
 Dxx = 10
 
@@ -50,7 +50,7 @@ VectorD.to_csv(pwd+"VectorD.txt", index=False, header=False)
 graph.MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd, alpha, T1min, T1max, Dmin, Dmax, T1xx, Dxx)
 graph.PlotT1D_D(Daxis, D, S, pwd, alpha, Dmin, Dmax)
 #graph.PlotT1D_T1(T1axis, T1, S, pwd, alpha, T1min, T1max)
-#graph.PlotT1D_T1_NoNorm(T1axis, T1, S, pwd, alpha, T1min, T1max)
+graph.PlotT1D_T1_NoNorm(T1axis, T1, S, pwd, alpha, T1min, T1max)
 graph.PlotT1D_D_NoNorm(Daxis, D, S, pwd, alpha, Dmin, Dmax)
 # CODIGO CHEVA
 

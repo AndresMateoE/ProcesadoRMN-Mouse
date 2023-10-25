@@ -145,6 +145,6 @@ ax = axs[3].twinx()
 ax.plot(D_1659, cumD, label = 'Cumul.', color = 'coral')
 ax.set_ylim(-0.02, 1.2)
 
-pwdd = ('G:/Unidades compartidas/TF-Andres/Mediciones/Dodecano_Bentheimer/Dodecano_Bentheimer/231002/Mojado_Agua/GraficosJuntos')
+pwdd = ('G:/Unidades compartidas/TF-Andres/Mediciones/Dodecano_Bentheimer/Dodecano_Bentheimer/231002/Mojado_Agua/GraficosJuntos/')
 plt.savefig(pwdd+"Diff_1D_NoNorm_Mojado", dpi=300)
 plt.show()
