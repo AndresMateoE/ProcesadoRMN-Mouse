@@ -65,6 +65,7 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
     
     ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
     ax.contour(T1, D, A.T, 8, cmap= 'magma', vmin=0.0003)
+    ax.contour(T1, D, A.T, 7, cmap= 'YlOrRd_r', vmin=0.0003)
     ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
     ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
     ax.set_xlim(10.0**T1min, 10.0**T1max)
