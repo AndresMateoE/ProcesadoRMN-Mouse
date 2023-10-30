@@ -57,15 +57,17 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
     maxi = np.max([T1min, Dmin])
     mini = np.min([T1max, Dmax])
     
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(dpi=300)
     fig.set_size_inches(10/2.54, 10/2.54)
-    ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
-                      color='black', ls='-', alpha=0.7, zorder=-2, 
-                      label = r'$T_1$ = $T_2$')
+# =============================================================================
+#     ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
+#                       color='black', ls='-', alpha=0.7, zorder=-2, 
+#                       label = r'$T_1$ = $T_2$')
+# =============================================================================
     
     ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
     ax.contour(T1, D, A.T, 8, cmap= 'magma', vmin=0.0003)
-    ax.contour(T1, D, A.T, 7, cmap= 'YlOrRd_r', vmin=0.0003)
+
     ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
     ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
     ax.set_xlim(10.0**T1min, 10.0**T1max)
@@ -95,7 +97,7 @@ def MapaDT2(Daxis, T2axis, Z, D, T2, S, pwd,
         S[:,-i] = 0
     #Graficamos
     
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(dpi=300)
     fig.set_size_inches(10/2.54, 10/2.54)
     maxi = np.max([Dmin, T2min])
     mini = np.min([Dmax, T2max])
