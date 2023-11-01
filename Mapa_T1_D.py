@@ -6,18 +6,32 @@ import pandas as pd
 
 #Carpeta con las mediciones
 
-pwd = ('H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_5000/')
+# =============================================================================
+# pwd_agua = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_5000/')
+# pwd_dode = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/')
+# pwd_hept = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/')
+# =============================================================================
+
+pwd = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/Mojado/Dodecano/172min/')
 
 #Leemos los archivos necesarios:
+
 param = IO.read_acq(pwd)
+# =============================================================================
+# Z_agua, T1axis, Daxis = IO.read_T1D(pwd_agua)
+# Z_hept, _, _ = IO.read_T1D(pwd_hept)
+# Z_dode, _, _ = IO.read_T1D(pwd_dode)
+# Z = Z_dode + Z_agua + Z_hept
+# =============================================================================
+
 Z, T1axis, Daxis = IO.read_T1D(pwd)
 
 
 nT1, nD = len(T1axis), len(Daxis)
 
 
-alpha = 0.001
-T1min, T1max = 1/2, 4
+alpha = 0.01
+T1min, T1max = 1/2, 5
 Dmin, Dmax = -1, 1
 
 

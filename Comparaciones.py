@@ -11,25 +11,25 @@ import matplotlib.pyplot as plt
 
 
 
-pwdHept8 = 'H:/Unidades compartidas/TF-Andres/Presentaciones Martes/231024/Tiempos_Heptano/8x8/1/'
+pwdHept8 = 'G:/Unidades compartidas/TF-Andres/Presentaciones Martes/231024/Tiempos_Heptano/8x8/1/'
 
 S_H8 = pd.read_csv(pwdHept8+"Transformada.txt", header=None).to_numpy()
 T1_H8 = pd.read_csv(pwdHept8+"VectorT1.txt", header=None).to_numpy()
 D_H8 = pd.read_csv(pwdHept8+"VectorD.txt", header=None).to_numpy()
 
-pwdHept16 = 'H:/Unidades compartidas/TF-Andres/Presentaciones Martes/231024/Tiempos_Heptano/16x16/1/'
+pwdHept16 = 'G:/Unidades compartidas/TF-Andres/Presentaciones Martes/231024/Tiempos_Heptano/16x16/1/'
 
 S_H16 = pd.read_csv(pwdHept16+"Transformada.txt", header=None).to_numpy()
 T1_H16 = pd.read_csv(pwdHept16+"VectorT1.txt", header=None).to_numpy()
 D_H16 = pd.read_csv(pwdHept16+"VectorD.txt", header=None).to_numpy()
 
-pwdDode16 = 'H:/Unidades compartidas/TF-Andres/Presentaciones Martes/231024/Tiempos_Dodecano/16x16/1/'
+pwdDode16 = 'G:/Unidades compartidas/TF-Andres/Presentaciones Martes/231024/Tiempos_Dodecano/16x16/1/'
 
 S_D16 = pd.read_csv(pwdDode16+"Transformada.txt", header=None).to_numpy()
 T1_D16 = pd.read_csv(pwdDode16+"VectorT1.txt", header=None).to_numpy()
 D_D16 = pd.read_csv(pwdDode16+"VectorD.txt", header=None).to_numpy()
 
-pwdDode8 = 'H:/Unidades compartidas/TF-Andres/Presentaciones Martes/231024/Tiempos_Dodecano/8x8/1/'
+pwdDode8 = 'G:/Unidades compartidas/TF-Andres/Presentaciones Martes/231024/Tiempos_Dodecano/8x8/1/'
 
 S_D8 = pd.read_csv(pwdDode8+"Transformada.txt", header=None).to_numpy()
 T1_D8 = pd.read_csv(pwdDode8+"VectorT1.txt", header=None).to_numpy()

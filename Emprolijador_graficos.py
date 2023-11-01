@@ -198,19 +198,19 @@ import numpy as np
 #   Mapas dobles T1D
 ############
 
-pwdAgua = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_5000/'
+pwdAgua = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_5000/'
 
 S_agua = pd.read_csv(pwdAgua+"Transformada.txt", header=None).to_numpy()
 T1_agua = pd.read_csv(pwdAgua+"VectorT1.txt", header=None).to_numpy()
 D_agua = pd.read_csv(pwdAgua+"VectorD.txt", header=None).to_numpy()
 
-pwdDode = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
+pwdDode = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
 
 S_dode = pd.read_csv(pwdDode+"Transformada.txt", header=None).to_numpy()
 T1_dode = pd.read_csv(pwdDode+"VectorT1.txt", header=None).to_numpy()
 D_dode = pd.read_csv(pwdDode+"VectorD.txt", header=None).to_numpy()
 
-pwdHept = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
+pwdHept = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
 
 S_hept = pd.read_csv(pwdHept+"Transformada.txt", header=None).to_numpy()
 T1_hept = pd.read_csv(pwdHept+"VectorT1.txt", header=None).to_numpy()

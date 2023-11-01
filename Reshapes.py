@@ -14,22 +14,26 @@ import numpy as np
 
 #Carpeta con las mediciones
 
-pwd_32 = ('H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_5000/')
-
-pwd = ('H:/Unidades compartidas/TF-Andres/Reshapes/Agua_5000/8_exp_lin_sup/')
-
+pwd_hept = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/')
+pwd_dode = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/')
+pwd = ('G:/Unidades compartidas/TF-Andres/Reshapes/Dodecano_Heptano/32/')
 #Leemos los archivos necesarios:
-param = IO.read_acq(pwd_32)
-Z_32, T1axis , Daxis =  IO.read_T1D(pwd_32)
+param = IO.read_acq(pwd_dode)
+Z_dode, T1axis , Daxis =  IO.read_T1D(pwd_dode)
+Z_hept, T1axis , Daxis =  IO.read_T1D(pwd_hept)
 
-posicionesT1 = [0, 4, 9, 13, 18, 22, 27, 31]
-posicionesD = [0, 4, 9, 13, 18, 22, 27, 31]
+Z = Z_dode + Z_hept
 
-Z_reshape = np.array(Z_32[posicionesT1][:, posicionesD])
-Daxis = np.array([Daxis[i] for i in posicionesD])
-T1axis = np.array([T1axis[i] for i in posicionesT1])
-
-Z = Z_reshape
+# =============================================================================
+# posicionesT1 = [0, 4, 9, 13, 18, 22, 27, 31]
+# posicionesD = [0, 1, 2, 4, 7, 11, 19, 31]
+# 
+# Z_reshape = np.array(Z[posicionesT1][:, posicionesD])
+# Daxis = np.array([Daxis[i] for i in posicionesD])
+# T1axis = np.array([T1axis[i] for i in posicionesT1])
+# 
+# Z = Z_reshape
+# =============================================================================
 
 nT1, nD = len(T1axis), len(Daxis)
 

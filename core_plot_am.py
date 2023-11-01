@@ -42,7 +42,7 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
 
     #Eliminamos las curvas mas chicas del mapa
     A = S
-    valor_umbral = 0.05 * np.max(S)
+    valor_umbral = 0.1 * np.max(S)
     A[A < valor_umbral] = 0
     #Eliminamos los bordes
     for i in range(0,Dxx):
@@ -59,6 +59,7 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
     
     fig, ax = plt.subplots(dpi=300)
     fig.set_size_inches(10/2.54, 10/2.54)
+    
 # =============================================================================
 #     ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
 #                       color='black', ls='-', alpha=0.7, zorder=-2, 
@@ -66,7 +67,7 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
 # =============================================================================
     
     ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
-    ax.contour(T1, D, A.T, 8, cmap= 'magma', vmin=0.0003)
+    contour = ax.contour(T1, D, A.T, 8, cmap= 'magma', vmin=0.0003)
 
     ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
     ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
@@ -76,6 +77,8 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
     ax.set_yscale('log')
 #    ax.set_aspect('equal', adjustable='datalim')
     plt.tick_params(axis='both', which='major', labelsize=10)
+    colorbar = plt.colorbar(contour,ax=ax, boundaries=np.linspace(-1, 1, 100))
+    colorbar.ax.tick_params(labelsize=5)
     plt.savefig(pwd+"Mapa_T1D", dpi=300)
     plt.show()
     
