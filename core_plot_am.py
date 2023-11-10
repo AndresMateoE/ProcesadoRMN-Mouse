@@ -42,7 +42,7 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
 
     #Eliminamos las curvas mas chicas del mapa
     A = S
-    valor_umbral = 0.1 * np.max(S)
+    valor_umbral = 0.05 * np.max(S)
     A[A < valor_umbral] = 0
     #Eliminamos los bordes
     for i in range(0,Dxx):

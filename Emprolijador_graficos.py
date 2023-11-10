@@ -9,6 +9,7 @@ Luego lo modificas a gusto en esta sección.
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import matplotlib as mpl
 
 ########
 # DT2
@@ -51,41 +52,44 @@ import numpy as np
 # T1D
 ########
 
-# =============================================================================
-# pwd = 'H:/Unidades compartidas/TF-Andres/Mediciones/Dodecano_Bentheimer/Dodecano_Bentheimer/230908/230908_T1D/1/'
-# 
-# S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
-# T1 = pd.read_csv(pwd+"VectorT1.txt", header=None).to_numpy()
-# D = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
-# 
-# 
-# T1min, T1max = 1, 4
-# Dmin, Dmax = -1, 1
-# 
-# maxi = np.max([T1min, Dmin])
-# mini = np.min([T1max, Dmax])
-# 
-# fig, ax = plt.subplots()
-# ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
-#                   color='black', ls='-', alpha=0.7, zorder=-2, 
-#                   label = r'$T_1$ = $T_2$')
-# 
-# A = S
-# valor_umbral = 0.0005
-# A[A < valor_umbral] = 0
-# 
-# pwdd = 'H:/Unidades compartidas/TF-Andres/Rafa/'
-# 
-# ax.contour(D[:,0], T1[:,0], A, 20, cmap= 'viridis')
-# ax.set_ylabel(r'$T_1$ [ms]')
-# ax.set_xlabel(r'$D$ [10^(-9) m^2/s]')
-# ax.set_ylim(10.0**T1min, 10.0**T1max)
-# ax.set_xlim(10.0**Dmin, 10.0**Dmax)
-# ax.set_xscale('log')
-# ax.set_yscale('log')
-# #plt.savefig(pwdd+"Mapa_T1D_Dodecano", dpi=300)
-# plt.show()
-# =============================================================================
+pwd = 'G:/Unidades compartidas/TF-Andres/Mediciones/Agua_Bentheimer/231109/231109_T1D/1/'
+
+S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
+T1 = pd.read_csv(pwd+"VectorT1.txt", header=None).to_numpy()
+D = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
+
+
+T1min, T1max = 1, 4
+Dmin, Dmax = -1, 1
+
+maxi = np.max([T1min, Dmin])
+mini = np.min([T1max, Dmax])
+
+fig, ax = plt.subplots(dpi=300)
+fig.set_size_inches(10/2.54, 10/2.54)
+ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
+                  color='black', ls='-', alpha=0.7, zorder=-2, 
+                  label = r'$T_1$ = $T_2$')
+alpha = 0.01
+A = S
+valor_umbral = 0.0005
+A[A < valor_umbral] = 0
+
+pwdd = 'H:/Unidades compartidas/TF-Andres/Rafa/'
+
+ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
+contour = ax.contour(D[:,0], T1[:,0], A, 8, cmap= 'magma', vmin=0.0003)
+colorbar = plt.colorbar(contour,spacing='uniform', pad=0.01)
+colorbar.ax.tick_params(labelsize=5)
+ax.set_ylabel(r'$T_1$ [ms]')
+ax.set_xlabel(r'$D$ [10^(-9) m^2/s]')
+ax.set_ylim(10.0**T1min, 10.0**T1max)
+ax.set_xlim(10.0**Dmin, 10.0**Dmax)
+ax.set_xscale('log')
+ax.set_yscale('log')
+plt.tick_params(axis='both', which='major', labelsize=10)
+#plt.savefig(pwdd+"Mapa_T1D_Dodecano", dpi=300)
+plt.show()
     
 
 ############
@@ -198,86 +202,88 @@ import numpy as np
 #   Mapas dobles T1D
 ############
 
-pwdAgua = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_5000/'
-
-S_agua = pd.read_csv(pwdAgua+"Transformada.txt", header=None).to_numpy()
-T1_agua = pd.read_csv(pwdAgua+"VectorT1.txt", header=None).to_numpy()
-D_agua = pd.read_csv(pwdAgua+"VectorD.txt", header=None).to_numpy()
-
-pwdDode = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
-
-S_dode = pd.read_csv(pwdDode+"Transformada.txt", header=None).to_numpy()
-T1_dode = pd.read_csv(pwdDode+"VectorT1.txt", header=None).to_numpy()
-D_dode = pd.read_csv(pwdDode+"VectorD.txt", header=None).to_numpy()
-
-pwdHept = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
-
-S_hept = pd.read_csv(pwdHept+"Transformada.txt", header=None).to_numpy()
-T1_hept = pd.read_csv(pwdHept+"VectorT1.txt", header=None).to_numpy()
-D_hept = pd.read_csv(pwdHept+"VectorD.txt", header=None).to_numpy()
-
-T1min, T1max = 0, 4
-Dmin, Dmax = -1, 1
-
-maxi = np.max([T1min, Dmin])
-mini = np.min([T1max, Dmax])
-
-fig, ax = plt.subplots(dpi=300)
-fig.set_size_inches(10/2.54, 10/2.54)
-ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
-                  color='black', ls='-', alpha=0.7, zorder=-2, 
-                  label = r'$T_1$ = $T_2$')
-#Eliminamos los bordes
-T1xx = Dxx = 10
-for i in range(0,Dxx):
-    S_dode[i,:] = 0
-    S_dode[-i,:] = 0
-    S_hept[i,:] = 0
-    S_hept[-i,:] = 0
-    S_agua[i,:] = 0
-    S_agua[-i,:] = 0
-
-for i  in range(0,T1xx):
-    S_dode[:,i] = 0
-    S_dode[:,-i] = 0
-    S_hept[:,i] = 0
-    S_hept[:,-i] = 0
-    S_agua[:,i] = 0
-    S_agua[:,-i] = 0
-
-
-#Filtramos
-A_dode = S_dode
-valor_umbral = 0.1 * np.max(S_dode)
-A_dode[A_dode < valor_umbral] = 0
-
-A_agua = S_agua
-valor_umbral = 0.1 * np.max(S_agua)
-A_agua[A_agua < valor_umbral] = 0
-
-A_hept = S_hept
-valor_umbral = 0.1 * np.max(S_hept)
-A_hept[A_hept < valor_umbral] = 0
-
-S = S_hept + S_dode + S_agua
-
-
-pwdd = 'H:/Unidades compartidas/TF-Andres/Presentaciones Martes/231024/'
-
-#ax.contour(T1_dode[:,0], D_dode[:,0], A_dode.T, 7, cmap= 'Blues_r')
-#ax.contour(T1_agua[:,0], D_agua[:,0], A_agua.T, 7, cmap= 'Greens_r')
-#ax.contour(T1_hept[:,0], D_hept[:,0], A_hept.T, 7, cmap= 'Reds_r')
-ax.contour(T1_hept[:,0], D_hept[:,0], S.T, 7, cmap= 'Reds_r')
-ax.set_xlabel(r'$T_1$ [ms]')
-ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
-ax.set_xlim(10.0**T1min, 10.0**T1max)
-ax.set_ylim(10.0**Dmin, 10.0**Dmax)
-ax.set_xscale('log')
-ax.set_yscale('log')
-plt.tick_params(axis='both', which='major', labelsize=10)
-#plt.savefig(pwdd+"Mapa_T1D_AHD", dpi=300)
-plt.show()
-
+# =============================================================================
+# pwdAgua = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_5000/'
+# 
+# S_agua = pd.read_csv(pwdAgua+"Transformada.txt", header=None).to_numpy()
+# T1_agua = pd.read_csv(pwdAgua+"VectorT1.txt", header=None).to_numpy()
+# D_agua = pd.read_csv(pwdAgua+"VectorD.txt", header=None).to_numpy()
+# 
+# pwdDode = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
+# 
+# S_dode = pd.read_csv(pwdDode+"Transformada.txt", header=None).to_numpy()
+# T1_dode = pd.read_csv(pwdDode+"VectorT1.txt", header=None).to_numpy()
+# D_dode = pd.read_csv(pwdDode+"VectorD.txt", header=None).to_numpy()
+# 
+# pwdHept = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
+# 
+# S_hept = pd.read_csv(pwdHept+"Transformada.txt", header=None).to_numpy()
+# T1_hept = pd.read_csv(pwdHept+"VectorT1.txt", header=None).to_numpy()
+# D_hept = pd.read_csv(pwdHept+"VectorD.txt", header=None).to_numpy()
+# 
+# T1min, T1max = 0, 4
+# Dmin, Dmax = -1, 1
+# 
+# maxi = np.max([T1min, Dmin])
+# mini = np.min([T1max, Dmax])
+# 
+# fig, ax = plt.subplots(dpi=300)
+# fig.set_size_inches(10/2.54, 10/2.54)
+# ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
+#                   color='black', ls='-', alpha=0.7, zorder=-2, 
+#                   label = r'$T_1$ = $T_2$')
+# #Eliminamos los bordes
+# T1xx = Dxx = 10
+# for i in range(0,Dxx):
+#     S_dode[i,:] = 0
+#     S_dode[-i,:] = 0
+#     S_hept[i,:] = 0
+#     S_hept[-i,:] = 0
+#     S_agua[i,:] = 0
+#     S_agua[-i,:] = 0
+# 
+# for i  in range(0,T1xx):
+#     S_dode[:,i] = 0
+#     S_dode[:,-i] = 0
+#     S_hept[:,i] = 0
+#     S_hept[:,-i] = 0
+#     S_agua[:,i] = 0
+#     S_agua[:,-i] = 0
+# 
+# 
+# #Filtramos
+# A_dode = S_dode
+# valor_umbral = 0.1 * np.max(S_dode)
+# A_dode[A_dode < valor_umbral] = 0
+# 
+# A_agua = S_agua
+# valor_umbral = 0.1 * np.max(S_agua)
+# A_agua[A_agua < valor_umbral] = 0
+# 
+# A_hept = S_hept
+# valor_umbral = 0.1 * np.max(S_hept)
+# A_hept[A_hept < valor_umbral] = 0
+# 
+# S = S_hept + S_dode + S_agua
+# 
+# 
+# pwdd = 'H:/Unidades compartidas/TF-Andres/Presentaciones Martes/231024/'
+# 
+# #ax.contour(T1_dode[:,0], D_dode[:,0], A_dode.T, 7, cmap= 'Blues_r')
+# #ax.contour(T1_agua[:,0], D_agua[:,0], A_agua.T, 7, cmap= 'Greens_r')
+# #ax.contour(T1_hept[:,0], D_hept[:,0], A_hept.T, 7, cmap= 'Reds_r')
+# ax.contour(T1_hept[:,0], D_hept[:,0], S.T, 7, cmap= 'Reds_r')
+# ax.set_xlabel(r'$T_1$ [ms]')
+# ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
+# ax.set_xlim(10.0**T1min, 10.0**T1max)
+# ax.set_ylim(10.0**Dmin, 10.0**Dmax)
+# ax.set_xscale('log')
+# ax.set_yscale('log')
+# plt.tick_params(axis='both', which='major', labelsize=10)
+# #plt.savefig(pwdd+"Mapa_T1D_AHD", dpi=300)
+# plt.show()
+# 
+# =============================================================================
 
 
 
