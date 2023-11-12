@@ -15,29 +15,94 @@ import matplotlib as mpl
 # DT2
 ########
 
-pwd = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/DT2_Todos/Agua/'
+# =============================================================================
+# pwd = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_5000/'
+# 
+# S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
+# T2 = pd.read_csv(pwd+"VectorT2.txt", header=None).to_numpy()
+# D = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
+# 
+# Dmin, Dmax = -1, 1
+# T2min, T2max = 1, 4
+# 
+# fig, ax = plt.subplots(dpi=600)
+# fig.set_size_inches(10/2.54, 10/2.54)
+# maxi = np.max([Dmin, T2min])
+# mini = np.min([Dmax, T2max])
+# ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
+#                   color='black', ls='-', alpha=0.7, zorder=-2)
+# 
+# A = S
+# valor_umbral = 0.05* np.max(S)
+# A[A < valor_umbral] = 0
+# alpha = 0.001
+# 
+# T1xx = 10
+# Dxx = 20
+# for i in range(0,Dxx):
+#     S[i,:] = 0
+#     S[-i,:] = 0
+# 
+# for i  in range(0,T1xx):
+#     S[:,i] = 0
+#     S[:,-i] = 0
+# 
+# pwdd = 'H:/Unidades compartidas/TF-Andres/Graficos_Finales/'
+# 
+# bounds = np.linspace(0, np.max(S))
+# cmap = mpl.cm.Blues_r
+# norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
+# N=8
+# 
+# ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
+# ax.contour(T2[:,0], D[:,0], A, N, vmax=0.004, cmap= cmap)
+# 
+# colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
+#               ax=ax, spacing='uniform', pad=0.01, ticks=np.round(np.linspace(0, np.max(S), N), decimals=5))
+#               #ax=ax, spacing='uniform', pad=0.01, ticks=np.linspace(0, np.max(S), N))
+# colorbar.ax.tick_params(labelsize=5)
+# colorbar.minorticks_off()
+# 
+# ax.set_xlabel(r'$T_2$ [ms]', fontsize=10)
+# ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
+# ax.set_ylim(10.0**Dmin, 10.0**Dmax)
+# ax.set_xlim(10.0**T2min, 10.0**T2max)
+# ax.set_xscale('log')
+# ax.set_yscale('log')
+# plt.tick_params(axis='both', which='major', labelsize=10)
+# #plt.savefig(pwdd+"Mapa_DT2_Agua", dpi=600)
+# plt.show()
+# =============================================================================
+
+########
+# T1D
+########
+
+pwd = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_3000/'
 
 S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
-T2 = pd.read_csv(pwd+"VectorT2.txt", header=None).to_numpy()
+T1 = pd.read_csv(pwd+"VectorT1.txt", header=None).to_numpy()
 D = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
 
+
+T1min, T1max = 1, 4
 Dmin, Dmax = -1, 1
-T2min, T2max = 1, 4
 
-fig, ax = plt.subplots(dpi=600)
+maxi = np.max([T1min, Dmin])
+mini = np.min([T1max, Dmax])
+
+fig, ax = plt.subplots(dpi=300)
 fig.set_size_inches(10/2.54, 10/2.54)
-maxi = np.max([Dmin, T2min])
-mini = np.min([Dmax, T2max])
 ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
-                  color='black', ls='-', alpha=0.7, zorder=-2)
-
+                  color='black', ls='-', alpha=0.7, zorder=-2, 
+                  label = r'$T_1$ = $T_2$')
+alpha = 0.0001
 A = S
-valor_umbral = 0.05* np.max(S)
+valor_umbral = 0.05*np.max(S)
 A[A < valor_umbral] = 0
-alpha = 0.001
 
 T1xx = 10
-Dxx = 20
+Dxx = 10
 for i in range(0,Dxx):
     S[i,:] = 0
     S[-i,:] = 0
@@ -54,86 +119,22 @@ norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
 N=8
 
 ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
-ax.contour(T2[:,0], D[:,0], A, N, vmax=0.004, cmap= cmap)
+contour = ax.contour(T1[:,0], D[:,0], A.T, N, cmap=cmap)
 
 colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
               ax=ax, spacing='uniform', pad=0.01, ticks=np.around(np.linspace(0, np.max(S), N), decimals=4))
 colorbar.ax.tick_params(labelsize=5)
 colorbar.minorticks_off()
 
-ax.set_xlabel(r'$T_2$ [ms]', fontsize=10)
+ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
 ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
+ax.set_xlim(10.0**T1min, 10.0**T1max)
 ax.set_ylim(10.0**Dmin, 10.0**Dmax)
-ax.set_xlim(10.0**T2min, 10.0**T2max)
 ax.set_xscale('log')
 ax.set_yscale('log')
 plt.tick_params(axis='both', which='major', labelsize=10)
-#plt.savefig(pwdd+"Mapa_DT2_Agua", dpi=600)
+plt.savefig(pwdd+"Mapa_T1D_Agua_3000", dpi=600)
 plt.show()
-
-########
-# T1D
-########
-
-# =============================================================================
-# pwd = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
-# 
-# S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
-# T1 = pd.read_csv(pwd+"VectorT1.txt", header=None).to_numpy()
-# D = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
-# 
-# 
-# T1min, T1max = 1, 4
-# Dmin, Dmax = -1, 1
-# 
-# maxi = np.max([T1min, Dmin])
-# mini = np.min([T1max, Dmax])
-# 
-# fig, ax = plt.subplots(dpi=300)
-# fig.set_size_inches(10/2.54, 10/2.54)
-# ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
-#                   color='black', ls='-', alpha=0.7, zorder=-2, 
-#                   label = r'$T_1$ = $T_2$')
-# alpha = 0.0001
-# A = S
-# valor_umbral = 0.05*np.max(S)
-# A[A < valor_umbral] = 0
-# 
-# T1xx = 10
-# Dxx = 20
-# for i in range(0,Dxx):
-#     S[i,:] = 0
-#     S[-i,:] = 0
-# 
-# for i  in range(0,T1xx):
-#     S[:,i] = 0
-#     S[:,-i] = 0
-# 
-# pwdd = 'H:/Unidades compartidas/TF-Andres/Graficos_Finales/'
-# 
-# bounds = np.linspace(0, np.max(S))
-# cmap = mpl.cm.Greens_r
-# norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
-# N=8
-# 
-# ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
-# contour = ax.contour(T1[:,0], D[:,0], A.T, N, cmap=cmap)
-# 
-# colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
-#               ax=ax, spacing='uniform', pad=0.01, ticks=np.around(np.linspace(0, np.max(S), N), decimals=4))
-# colorbar.ax.tick_params(labelsize=5)
-# colorbar.minorticks_off()
-# 
-# ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
-# ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
-# ax.set_xlim(10.0**T1min, 10.0**T1max)
-# ax.set_ylim(10.0**Dmin, 10.0**Dmax)
-# ax.set_xscale('log')
-# ax.set_yscale('log')
-# plt.tick_params(axis='both', which='major', labelsize=10)
-# #plt.savefig(pwdd+"Mapa_T1D_Heptano", dpi=600)
-# plt.show()
-# =============================================================================
     
 
 ############
