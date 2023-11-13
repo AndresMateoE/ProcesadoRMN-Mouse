@@ -12,7 +12,7 @@ import pandas as pd
 # pwd_hept = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/')
 # =============================================================================
 
-pwd = ('H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_3000/')
+pwd = ('G:/Unidades compartidas/TF-Andres/Mediciones/CicloOctano_Bentheimer/231113/231113_T1D_8x8/1/')
 
 #Leemos los archivos necesarios:
 
@@ -30,7 +30,7 @@ Z, T1axis, Daxis = IO.read_T1D(pwd)
 nT1, nD = len(T1axis), len(Daxis)
 
 
-alpha = 0.001
+alpha = 0.01
 T1min, T1max = 1/2, 5
 Dmin, Dmax = -1, 1
 
