@@ -43,7 +43,7 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
 
     #Eliminamos las curvas mas chicas del mapa
     A = S
-    valor_umbral = 0.05 * np.max(S)
+    valor_umbral = 0.1 * np.max(S)
     A[A < valor_umbral] = 0
     #Eliminamos los bordes
     for i in range(0,Dxx):
@@ -72,7 +72,7 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
     N=8
     
     ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
-    contour = ax.contour(T1, D, A.T, N, cmap=cmap, vmin=0.0003)
+    contour = ax.contour(T1, D, A.T, N, cmap=cmap)
 
     ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
     ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
