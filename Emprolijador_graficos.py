@@ -85,71 +85,69 @@ from scipy.signal import find_peaks
 # T1D
 ########
 
+pwd = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/CicloOctano/'
+
+S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
+T1 = pd.read_csv(pwd+"VectorT1.txt", header=None).to_numpy()
+D = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
+
+
+T1min, T1max = 1, 4
+Dmin, Dmax = -1, 1
+
+maxi = np.max([T1min, Dmin])
+mini = np.min([T1max, Dmax])
+
+fig, ax = plt.subplots(dpi=300)
+fig.set_size_inches(10/2.54, 10/2.54)
+ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
+                  color='black', ls='-', alpha=0.7, zorder=-2, 
+                  label = r'$T_1$ = $T_2$')
+alpha = 0.0001
+A = S
+valor_umbral = 0.05*np.max(S)
+A[A < valor_umbral] = 0
+
+T1xx = 10
+Dxx = 10
+for i in range(0,Dxx):
+    S[i,:] = 0
+    S[-i,:] = 0
+
+for i  in range(0,T1xx):
+    S[:,i] = 0
+    S[:,-i] = 0
+
+pwdd = 'H:/Unidades compartidas/TF-Andres/Graficos_Finales/'
+
+bounds = np.linspace(0, np.max(S))
+cmap = mpl.cm.Wistia_r
+norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
+N=8
+
 # =============================================================================
-# pwd = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/CicloOctano/'
-# 
-# S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
-# T1 = pd.read_csv(pwd+"VectorT1.txt", header=None).to_numpy()
-# D = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
-# 
-# 
-# T1min, T1max = 1, 4
-# Dmin, Dmax = -1, 1
-# 
-# maxi = np.max([T1min, Dmin])
-# mini = np.min([T1max, Dmax])
-# 
-# fig, ax = plt.subplots(dpi=300)
-# fig.set_size_inches(10/2.54, 10/2.54)
-# ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
-#                   color='black', ls='-', alpha=0.7, zorder=-2, 
-#                   label = r'$T_1$ = $T_2$')
-# alpha = 0.0001
-# A = S
-# valor_umbral = 0.05*np.max(S)
-# A[A < valor_umbral] = 0
-# 
-# T1xx = 10
-# Dxx = 10
-# for i in range(0,Dxx):
-#     S[i,:] = 0
-#     S[-i,:] = 0
-# 
-# for i  in range(0,T1xx):
-#     S[:,i] = 0
-#     S[:,-i] = 0
-# 
-# pwdd = 'H:/Unidades compartidas/TF-Andres/Graficos_Finales/'
-# 
-# bounds = np.linspace(0, np.max(S))
-# cmap = mpl.cm.Wistia_r
-# norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
-# N=8
-# 
-# # =============================================================================
-# # indice_maximo = np.unravel_index(np.argmax(S), S.shape)
-# # ax.axvline(T1[indice_maximo[0]], color='grey', ls=':', lw=1)
-# # ax.axhline(D[indice_maximo[1]], color='grey', ls=':', lw=1)
-# # =============================================================================
-# 
-# ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
-# contour = ax.contour(T1[:,0], D[:,0], A.T, N, cmap=cmap)
-# 
-# colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
-#               ax=ax, spacing='uniform', pad=0.01, ticks=np.around(np.linspace(0, np.max(S), N), decimals=4))
-# colorbar.ax.tick_params(labelsize=5)
-# colorbar.minorticks_off()
-# 
-# ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
-# ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
-# ax.set_xlim(10.0**T1min, 10.0**T1max)
-# ax.set_ylim(10.0**Dmin, 10.0**Dmax)
-# ax.set_xscale('log')
-# ax.set_yscale('log')
-# plt.tick_params(axis='both', which='major', labelsize=10)
-# #plt.savefig(pwdd+"Mapa_T1D_CicloOctano", dpi=600)
-# plt.show()
+# indice_maximo = np.unravel_index(np.argmax(S), S.shape)
+# ax.axvline(T1[indice_maximo[0]], color='grey', ls=':', lw=1)
+# ax.axhline(D[indice_maximo[1]], color='grey', ls=':', lw=1)
 # =============================================================================
+
+ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
+contour = ax.contour(T1[:,0], D[:,0], A.T, N, cmap=cmap)
+
+colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
+              ax=ax, spacing='uniform', pad=0.01, ticks=np.around(np.linspace(0, np.max(S), N), decimals=4))
+colorbar.ax.tick_params(labelsize=5)
+colorbar.minorticks_off()
+
+ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
+ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
+ax.set_xlim(10.0**T1min, 10.0**T1max)
+ax.set_ylim(10.0**Dmin, 10.0**Dmax)
+ax.set_xscale('log')
+ax.set_yscale('log')
+plt.tick_params(axis='both', which='major', labelsize=10)
+#plt.savefig(pwdd+"Mapa_T1D_CicloOctano", dpi=600)
+plt.show()
     
 
 ############
@@ -377,8 +375,8 @@ pwdd = 'H:/Unidades compartidas/TF-Andres/Graficos_Finales/'
 ax.contour(T1_dode[:,0], D_dode[:,0], A_dode.T, 8, cmap= 'Reds_r')
 ax.contour(T1_agua[:,0], D_agua[:,0], A_agua.T, 8, cmap= 'Blues_r')
 ax.contour(T1_hept[:,0], D_hept[:,0], A_hept.T, 8, cmap= 'Greens_r')
-ax.contour(T1_oct[:,0], D_oct[:,0], A_oct.T, 8, cmap= 'Wistia_r', zorder=-2)
-#ax.contour(T1_hept[:,0], D_hept[:,0], S.T, 7, cmap= 'Reds_r')
+#ax.contour(T1_oct[:,0], D_oct[:,0], A_oct.T, 8, cmap= 'Wistia_r', zorder=-2)
+ax.contour(T1[:,0], D[:,0], S.T, 8, cmap= 'Wistia_r', zorder=-2)
 ax.set_xlabel(r'$T_1$ [ms]')
 ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
 ax.set_xlim(10.0**T1min, 10.0**T1max)
