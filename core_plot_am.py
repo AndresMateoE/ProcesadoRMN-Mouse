@@ -58,7 +58,7 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
     maxi = np.max([T1min, Dmin])
     mini = np.min([T1max, Dmax])
     
-    fig, ax = plt.subplots(dpi=300)
+    fig, ax = plt.subplots(dpi=600)
     fig.set_size_inches(10/2.54, 10/2.54)
     
 # =============================================================================
@@ -86,7 +86,7 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
                   ax=ax, spacing='uniform', pad=0.01, ticks=np.around(np.linspace(0, np.max(S), N), decimals=4))
     colorbar.ax.tick_params(labelsize=5)
     colorbar.minorticks_off()
-    plt.savefig(pwd+"Mapa_T1D", dpi=300)
+    plt.savefig(pwd+"Mapa_T1D", dpi=600)
     plt.show()
     
 
