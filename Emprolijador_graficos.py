@@ -275,31 +275,31 @@ from scipy.signal import find_peaks
 #   Mapas dobles T1D
 ############
 
-pwdAgua = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_3000/'
+pwdAgua = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_3000/'
 
 S_agua = pd.read_csv(pwdAgua+"Transformada.txt", header=None).to_numpy()
 T1_agua = pd.read_csv(pwdAgua+"VectorT1.txt", header=None).to_numpy()
 D_agua = pd.read_csv(pwdAgua+"VectorD.txt", header=None).to_numpy()
 
-pwdDode = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
+pwdDode = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
 
 S_dode = pd.read_csv(pwdDode+"Transformada.txt", header=None).to_numpy()
 T1_dode = pd.read_csv(pwdDode+"VectorT1.txt", header=None).to_numpy()
 D_dode = pd.read_csv(pwdDode+"VectorD.txt", header=None).to_numpy()
 
-pwdHept = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
+pwdHept = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
 
 S_hept = pd.read_csv(pwdHept+"Transformada.txt", header=None).to_numpy()
 T1_hept = pd.read_csv(pwdHept+"VectorT1.txt", header=None).to_numpy()
 D_hept = pd.read_csv(pwdHept+"VectorD.txt", header=None).to_numpy()
 
-pwdOct = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/CicloOctano/'
+pwdOct = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/CicloOctano/'
 
 S_oct = pd.read_csv(pwdOct+"Transformada.txt", header=None).to_numpy()
 T1_oct = pd.read_csv(pwdOct+"VectorT1.txt", header=None).to_numpy()
 D_oct = pd.read_csv(pwdOct+"VectorD.txt", header=None).to_numpy()
 
-pwdPet = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Petroleo/'
+pwdPet = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Petroleo/'
 
 S_Pet = pd.read_csv(pwdPet+"Transformada.txt", header=None).to_numpy()
 T1_Pet = pd.read_csv(pwdPet+"VectorT1.txt", header=None).to_numpy()
@@ -387,11 +387,11 @@ A_Pet[A_Pet < valor_umbral] = 0
 #S = S_hept + S_dode + S_agua + S_oct
 
 
-pwdd = 'G:/Unidades compartidas/TF-Andres/Graficos_Finales/'
+pwdd = 'H:/Unidades compartidas/TF-Andres/Graficos_Finales/'
 
 
 ax.contour(T1_dode[:,0], D_dode[:,0], A_dode.T, 8, cmap= 'Reds_r')
-#ax.contour(T1_agua[:,0], D_agua[:,0], A_agua.T, 8, cmap= 'Blues_r')
+ax.contour(T1_agua[:,0], D_agua[:,0], A_agua.T, 8, cmap= 'Blues_r')
 ax.contour(T1_hept[:,0], D_hept[:,0], A_hept.T, 8, cmap= 'Greens_r', zorder=-3)
 ax.contour(T1_Pet[:,0], D_Pet[:,0], A_Pet.T, 8, cmap= 'Purples_r')
 #ax.contour(T1_oct[:,0], D_oct[:,0], A_oct.T, 8, cmap= 'Wistia_r', zorder=-2)
@@ -413,6 +413,7 @@ x = (np.linspace(10, 10000, 1000))
 y = (0.000000007)* x**(np.log10(y2/y1)/np.log10(x2/x1))
 #ax.plot([10**(np.log10(x1)),10**(np.log10(x2))], [10**(np.log10(y1)),10**(np.log10(y2))], linestyle='dashed', color='green', lw=2, zorder=-4)
 #ax.plot(10**np.log10(x),10**np.log10(y), linestyle='dashed', color='green', lw=1, scalex=True)
+ax.plot([10,10000],[2.18,2.18], linestyle='dashed', color='blue', lw=1, zorder=-4)
 ax.plot(x,y, linestyle='dashed', color='green', lw=1, zorder=-4)
 ax.set_xlabel(r'$T_1$ [ms]')
 ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
@@ -422,7 +423,7 @@ ax.set_xscale('log')
 ax.set_yscale('log')
 
 plt.tick_params(axis='both', which='major', labelsize=10)
-#plt.savefig(pwdd+"Mapa_T1D_alcanos_petroleo", dpi=600)
+#plt.savefig(pwdd+"Mapa_T1D_alcanos_petroleo_lineas", dpi=600)
 plt.show()
 
 
