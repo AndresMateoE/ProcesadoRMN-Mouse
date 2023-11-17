@@ -10,7 +10,7 @@ import core_plot_am as graph
  
 Tmin = 0.1
 Tmax = 5000
-N = 8
+N = 32
 
 amax = np.log10(Tmax)
 amin = np.log10(Tmin)
@@ -21,9 +21,12 @@ for i in range(N):
     t1Axis.append(10**(amin+astep*(i)))
 
 print(t1Axis)
+print(np.sum(t1Axis))
 
-Lineal = np.around(np.linspace(Tmin,Tmax, N), 2)
-print(Lineal)
+# =============================================================================
+# Lineal = np.around(np.linspace(Tmin,Tmax, N), 2)
+# print(Lineal)
+# =============================================================================
 
 # =============================================================================
 # pwd_dode = ('H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/')
