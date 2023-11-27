@@ -85,79 +85,77 @@ from scipy.signal import find_peaks
 # T1D
 ########
 
+pwd = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/CicloOctano/'
+
+S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
+T1 = pd.read_csv(pwd+"VectorT1.txt", header=None).to_numpy()
+D = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
+
+
+T1min, T1max = 1, 5
+Dmin, Dmax = -1, 1
+
+maxi = np.max([T1min, Dmin])
+mini = np.min([T1max, Dmax])
+
+fig, ax = plt.subplots(dpi=600)
+fig.set_size_inches(10/2.54, 10/2.54)
+ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
+                  color='black', ls='-', alpha=0.7, zorder=-2, 
+                  label = r'$T_1$ = $T_2$')
+alpha = 0.01
+A = S
+valor_umbral = 0.05*np.max(S)
+A[A < valor_umbral] = 0
+
+T1xx = 40
+Dxx = 20
+for i in range(0,Dxx):
+    S[i,:] = 0
+    S[-i,:] = 0
+
+for i  in range(0,T1xx):
+    S[:,i] = 0
+    S[:,-i] = 0
+
+pwdd = 'G:/Unidades compartidas/TF-Andres/Graficos_Finales/Remojado/'
+
+bounds = np.linspace(0, np.max(S))
+cmap = mpl.cm.magma
+norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
+N=8
+
 # =============================================================================
-# pwd = 'H:/Unidades compartidas/TF-Andres/Reshapes/Dodecano_Heptano/Exp/'
-# 
-# S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
-# T1 = pd.read_csv(pwd+"VectorT1.txt", header=None).to_numpy()
-# D = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
-# 
-# 
-# T1min, T1max = 1, 4
-# Dmin, Dmax = -1, 1
-# 
-# maxi = np.max([T1min, Dmin])
-# mini = np.min([T1max, Dmax])
-# 
-# fig, ax = plt.subplots(dpi=600)
-# fig.set_size_inches(10/2.54, 10/2.54)
-# ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
-#                   color='black', ls='-', alpha=0.7, zorder=-2, 
-#                   label = r'$T_1$ = $T_2$')
-# alpha = 0.01
-# A = S
-# valor_umbral = 0.05*np.max(S)
-# A[A < valor_umbral] = 0
-# 
-# T1xx = 10
-# Dxx = 35
-# for i in range(0,Dxx):
-#     S[i,:] = 0
-#     S[-i,:] = 0
-# 
-# for i  in range(0,T1xx):
-#     S[:,i] = 0
-#     S[:,-i] = 0
-# 
-# pwdd = 'H:/Unidades compartidas/TF-Andres/Graficos_Finales/Reshapes/'
-# 
-# bounds = np.linspace(0, np.max(S))
-# cmap = mpl.cm.magma
-# norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
-# N=8
-# 
-# # =============================================================================
-# # indice_maximo = np.unravel_index(np.argmax(S), S.shape)
-# # ax.axvline(T1[indice_maximo[0]], color='grey', ls=':', lw=1)
-# # ax.axhline(D[indice_maximo[1]], color='grey', ls=':', lw=1)
-# # =============================================================================
-# 
-# ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
-# contour = ax.contour(T1[:,0], D[:,0], A.T, N, cmap=cmap)
-# 
-# colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
-#               ax=ax, spacing='uniform', pad=0.01, ticks=np.around(np.linspace(0, np.max(S), N), decimals=4))
-# colorbar.ax.tick_params(labelsize=5)
-# colorbar.minorticks_off()
-# 
-# x1, y1 = 856.87, 0.7
-# x2, y2 = 1380, 2.57
-# x = (np.linspace(10, 10000, 1000))
-# y = (0.000000007)* x**(np.log10(y2/y1)/np.log10(x2/x1))
-# ax.plot(x,y, linestyle='dashed', color='green', lw=1, zorder=-4)
-# ax.plot([10,100000],[2.18,2.18], linestyle='dashed', color='blue', lw=1, zorder=-4)
-# 
-# ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
-# ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
-# ax.set_xlim(10.0**T1min, 10.0**T1max)
-# ax.set_ylim(10.0**Dmin, 10.0**Dmax)
-# ax.set_xscale('log')
-# ax.set_yscale('log')
-# plt.tick_params(axis='both', which='major', labelsize=10)
-# #plt.savefig(pwdd+"Exp_bienDiff", dpi=600, bbox_inches='tight')
-# plt.show()
-#     
+# indice_maximo = np.unravel_index(np.argmax(S), S.shape)
+# ax.axvline(T1[indice_maximo[0]], color='grey', ls=':', lw=1)
+# ax.axhline(D[indice_maximo[1]], color='grey', ls=':', lw=1)
 # =============================================================================
+
+ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
+contour = ax.contour(T1[:,0], D[:,0], A.T, N, cmap=cmap)
+
+colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
+              ax=ax, spacing='uniform', pad=0.01, ticks=np.around(np.linspace(0, np.max(S), N), decimals=4))
+colorbar.ax.tick_params(labelsize=5)
+colorbar.minorticks_off()
+
+x1, y1 = 856.87, 0.7
+x2, y2 = 1380, 2.57
+x = (np.linspace(10, 10000, 1000))
+y = (0.000000007)* x**(np.log10(y2/y1)/np.log10(x2/x1))
+ax.plot(x,y, linestyle='dashed', color='green', lw=1, zorder=-4)
+ax.plot([10,100000],[2.18,2.18], linestyle='dashed', color='blue', lw=1, zorder=-4)
+
+ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
+ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
+ax.set_xlim(10.0**T1min, 10.0**T1max)
+ax.set_ylim(10.0**Dmin, 10.0**Dmax)
+ax.set_xscale('log')
+ax.set_yscale('log')
+plt.tick_params(axis='both', which='major', labelsize=10)
+#plt.savefig(pwdd+"Tiempo_inf", dpi=600, bbox_inches='tight')
+plt.show()
+    
 
 ############
 #   Mapas dobles DT2
@@ -282,48 +280,50 @@ from scipy.signal import find_peaks
 #   Mapas Multiples T1D
 ############
 
-pwdAgua = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_3000/'
+pwdAgua = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_3000/'
 
 S_agua = pd.read_csv(pwdAgua+"Transformada.txt", header=None).to_numpy()
 T1_agua = pd.read_csv(pwdAgua+"VectorT1.txt", header=None).to_numpy()
 D_agua = pd.read_csv(pwdAgua+"VectorD.txt", header=None).to_numpy()
 
-pwdDode = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
+pwdDode = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
 
 S_dode = pd.read_csv(pwdDode+"Transformada.txt", header=None).to_numpy()
 T1_dode = pd.read_csv(pwdDode+"VectorT1.txt", header=None).to_numpy()
 D_dode = pd.read_csv(pwdDode+"VectorD.txt", header=None).to_numpy()
 
-pwdHept = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
+pwdHept = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
 
 S_hept = pd.read_csv(pwdHept+"Transformada.txt", header=None).to_numpy()
 T1_hept = pd.read_csv(pwdHept+"VectorT1.txt", header=None).to_numpy()
 D_hept = pd.read_csv(pwdHept+"VectorD.txt", header=None).to_numpy()
 
-pwdOct = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/CicloOctano/'
+pwdOct = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/CicloOctano/'
 
 S_oct = pd.read_csv(pwdOct+"Transformada.txt", header=None).to_numpy()
 T1_oct = pd.read_csv(pwdOct+"VectorT1.txt", header=None).to_numpy()
 D_oct = pd.read_csv(pwdOct+"VectorD.txt", header=None).to_numpy()
 
-pwdPet = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Petroleo/'
+pwdPet = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Petroleo/'
 
 S_Pet = pd.read_csv(pwdPet+"Transformada.txt", header=None).to_numpy()
 T1_Pet = pd.read_csv(pwdPet+"VectorT1.txt", header=None).to_numpy()
 D_Pet = pd.read_csv(pwdPet+"VectorD.txt", header=None).to_numpy()
 
-T1min, T1max = 1, 4
-Dmin, Dmax = -1, 1
+T1min, T1max = 0, 4
+Dmin, Dmax = -2, 2
 
 maxi = np.max([T1min, Dmin])
 mini = np.min([T1max, Dmax])
 
 fig, ax = plt.subplots(dpi=600)
 
-fig.set_size_inches(10/2.54, 10/2.54)
-ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
-                  color='black', ls='-', alpha=0.7, zorder=-2, 
-                  label = r'$T_1$ = $T_2$')
+fig.set_size_inches(11/2.54, 10/2.54)
+# =============================================================================
+# ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
+#                   color='black', ls='-', alpha=0.7, zorder=-2, 
+#                   label = r'$T_1$ = $T_2$')
+# =============================================================================
 #Eliminamos los bordes
 
 T1xx = Dxx = 20
@@ -394,15 +394,15 @@ A_Pet[A_Pet < valor_umbral] = 0
 #S = S_hept + S_dode + S_agua + S_oct
 
 
-pwdd = 'H:/Unidades compartidas/TF-Andres/Graficos_Finales/Reshapes/'
+pwdd = 'G:/Unidades compartidas/TF-Andres/Graficos_Finales/'
 
 
 ax.contour(T1_dode[:,0], D_dode[:,0], A_dode.T, 8, cmap= 'Reds_r')
-#ax.contour(T1_agua[:,0], D_agua[:,0], A_agua.T, 8, cmap= 'Blues_r')
+ax.contour(T1_agua[:,0], D_agua[:,0], A_agua.T, 8, cmap= 'Blues_r')
 ax.contour(T1_hept[:,0], D_hept[:,0], A_hept.T, 8, cmap= 'Greens_r', zorder=1)
-#ax.contour(T1_Pet[:,0], D_Pet[:,0], A_Pet.T, 8, cmap= 'Purples_r')
+ax.contour(T1_Pet[:,0], D_Pet[:,0], A_Pet.T, 8, cmap= 'Purples_r')
 #ax.contour(T1_oct[:,0], D_oct[:,0], A_oct.T, 8, cmap= 'Wistia_r', zorder=-2)
-#ax.contour(T1[:,0], D[:,0], S.T, 8, cmap= 'Wistia_r', zorder=-2)
+ax.contour(T1[:,0], D[:,0], S.T, 8, cmap= 'Wistia_r', zorder=-2)
 
 
 # =============================================================================
@@ -422,7 +422,7 @@ x2, y2 = 1380, 2.57
 x = (np.linspace(10, 10000, 1000))
 y = (0.000000007)* x**(np.log10(y2/y1)/np.log10(x2/x1))
 ax.plot(x,y, linestyle='dashed', color='green', lw=1, zorder=-4)
-ax.plot([10,10000],[2.18,2.18], linestyle='dashed', color='blue', lw=1, zorder=-4)
+ax.plot([1,100000],[2.18,2.18], linestyle='dashed', color='blue', lw=1, zorder=-4)
 ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
 #ax.plot([10**(np.log10(x1)),10**(np.log10(x2))], [10**(np.log10(y1)),10**(np.log10(y2))], linestyle='dashed', color='green', lw=2, zorder=-4)
 #ax.plot(10**np.log10(x),10**np.log10(y), linestyle='dashed', color='green', lw=1, scalex=True)
@@ -435,7 +435,8 @@ ax.set_xscale('log')
 ax.set_yscale('log')
 
 plt.tick_params(axis='both', which='major', labelsize=10)
-plt.savefig(pwdd+"Mapa_Hept_Dode_lineas", dpi=600)
+plt.tick_params(axis='both', which='minor', labelsize=10)
+plt.savefig(pwdd+"Grafico_grande_todos_160", dpi=160)
 plt.show()
 
 

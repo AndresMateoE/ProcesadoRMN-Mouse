@@ -12,7 +12,7 @@ import pandas as pd
 # pwd_hept = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/')
 # =============================================================================
 
-pwd = ('H:/Unidades compartidas/TF-Andres/Mediciones/Bentheimer_MojadoDoble/Dodecano231122/1549/231122_T1D_8x8/1/')
+pwd = ('G:/Unidades compartidas/TF-Andres/Mediciones/Bentheimer_MojadoDoble/Dodecano231122/inf/231127_T1D_8x8/1/')
 
 #Leemos los archivos necesarios:
 
