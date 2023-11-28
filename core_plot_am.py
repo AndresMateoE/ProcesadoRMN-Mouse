@@ -73,6 +73,12 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
     
     ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
     contour = ax.contour(T1, D, A.T, N, cmap=cmap)
+    x1, y1 = 856.87, 0.7
+    x2, y2 = 1380, 2.57
+    x = (np.linspace(10, 10000, 1000))
+    y = (0.000000007)* x**(np.log10(y2/y1)/np.log10(x2/x1))
+    ax.plot(x,y, linestyle='dashed', color='green', lw=1, zorder=-4)
+    ax.plot([10,100000],[2.18,2.18], linestyle='dashed', color='blue', lw=1, zorder=-4)
 
     ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
     ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)

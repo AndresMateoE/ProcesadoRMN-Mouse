@@ -8,8 +8,8 @@ import numpy as np
 import core_IO_Andres as IO
 import core_plot_am as graph
  
-Tmin = 0.1
-Tmax = 5000
+Tmin = 0.03
+Tmax = 0.8
 N = 32
 
 amax = np.log10(Tmax)

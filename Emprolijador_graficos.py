@@ -85,7 +85,7 @@ from scipy.signal import find_peaks
 # T1D
 ########
 
-pwd = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/CicloOctano/'
+pwd = 'G:/Unidades compartidas/TF-Andres/Mediciones/Bentheimer_MojadoDoble/Dodecano231122/1549/231122_T1D_8x8/1/'
 
 S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
 T1 = pd.read_csv(pwd+"VectorT1.txt", header=None).to_numpy()
@@ -108,7 +108,7 @@ A = S
 valor_umbral = 0.05*np.max(S)
 A[A < valor_umbral] = 0
 
-T1xx = 40
+T1xx = 25
 Dxx = 20
 for i in range(0,Dxx):
     S[i,:] = 0
@@ -153,7 +153,7 @@ ax.set_ylim(10.0**Dmin, 10.0**Dmax)
 ax.set_xscale('log')
 ax.set_yscale('log')
 plt.tick_params(axis='both', which='major', labelsize=10)
-#plt.savefig(pwdd+"Tiempo_inf", dpi=600, bbox_inches='tight')
+#plt.savefig(pwdd+"Tiempo_60min", dpi=600, bbox_inches='tight')
 plt.show()
     
 
@@ -280,164 +280,166 @@ plt.show()
 #   Mapas Multiples T1D
 ############
 
-pwdAgua = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_3000/'
-
-S_agua = pd.read_csv(pwdAgua+"Transformada.txt", header=None).to_numpy()
-T1_agua = pd.read_csv(pwdAgua+"VectorT1.txt", header=None).to_numpy()
-D_agua = pd.read_csv(pwdAgua+"VectorD.txt", header=None).to_numpy()
-
-pwdDode = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
-
-S_dode = pd.read_csv(pwdDode+"Transformada.txt", header=None).to_numpy()
-T1_dode = pd.read_csv(pwdDode+"VectorT1.txt", header=None).to_numpy()
-D_dode = pd.read_csv(pwdDode+"VectorD.txt", header=None).to_numpy()
-
-pwdHept = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
-
-S_hept = pd.read_csv(pwdHept+"Transformada.txt", header=None).to_numpy()
-T1_hept = pd.read_csv(pwdHept+"VectorT1.txt", header=None).to_numpy()
-D_hept = pd.read_csv(pwdHept+"VectorD.txt", header=None).to_numpy()
-
-pwdOct = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/CicloOctano/'
-
-S_oct = pd.read_csv(pwdOct+"Transformada.txt", header=None).to_numpy()
-T1_oct = pd.read_csv(pwdOct+"VectorT1.txt", header=None).to_numpy()
-D_oct = pd.read_csv(pwdOct+"VectorD.txt", header=None).to_numpy()
-
-pwdPet = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Petroleo/'
-
-S_Pet = pd.read_csv(pwdPet+"Transformada.txt", header=None).to_numpy()
-T1_Pet = pd.read_csv(pwdPet+"VectorT1.txt", header=None).to_numpy()
-D_Pet = pd.read_csv(pwdPet+"VectorD.txt", header=None).to_numpy()
-
-T1min, T1max = 0, 4
-Dmin, Dmax = -2, 2
-
-maxi = np.max([T1min, Dmin])
-mini = np.min([T1max, Dmax])
-
-fig, ax = plt.subplots(dpi=600)
-
-fig.set_size_inches(11/2.54, 10/2.54)
 # =============================================================================
-# ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
-#                   color='black', ls='-', alpha=0.7, zorder=-2, 
-#                   label = r'$T_1$ = $T_2$')
-# =============================================================================
-#Eliminamos los bordes
-
-T1xx = Dxx = 20
-for i in range(0,Dxx):
-    S_dode[i,:] = 0
-    S_dode[-i,:] = 0
-    S_hept[i,:] = 0
-    S_hept[-i,:] = 0
-    S_agua[i,:] = 0
-    S_agua[-i,:] = 0
-    S_oct[i,:] = 0
-    S_oct[-i,:] = 0
-    S_Pet[i,:] = 0
-    S_Pet[-i,:] = 0
-
-for i  in range(0,T1xx):
-    S_dode[:,i] = 0
-    S_dode[:,-i] = 0
-    S_hept[:,i] = 0
-    S_hept[:,-i] = 0
-    S_agua[:,i] = 0
-    S_agua[:,-i] = 0
-    S_oct[:,i] = 0
-    S_oct[:,-i] = 0
-    S_Pet[:,i] = 0
-    S_Pet[:,-i] = 0
-
-#Filtramos
-# =============================================================================
-# A_dode = S_dode
-# valor_umbral = 0.1 * np.max(S_dode)
+# pwdAgua = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_3000/'
+# 
+# S_agua = pd.read_csv(pwdAgua+"Transformada.txt", header=None).to_numpy()
+# T1_agua = pd.read_csv(pwdAgua+"VectorT1.txt", header=None).to_numpy()
+# D_agua = pd.read_csv(pwdAgua+"VectorD.txt", header=None).to_numpy()
+# 
+# pwdDode = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
+# 
+# S_dode = pd.read_csv(pwdDode+"Transformada.txt", header=None).to_numpy()
+# T1_dode = pd.read_csv(pwdDode+"VectorT1.txt", header=None).to_numpy()
+# D_dode = pd.read_csv(pwdDode+"VectorD.txt", header=None).to_numpy()
+# 
+# pwdHept = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
+# 
+# S_hept = pd.read_csv(pwdHept+"Transformada.txt", header=None).to_numpy()
+# T1_hept = pd.read_csv(pwdHept+"VectorT1.txt", header=None).to_numpy()
+# D_hept = pd.read_csv(pwdHept+"VectorD.txt", header=None).to_numpy()
+# 
+# pwdOct = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/CicloOctano/'
+# 
+# S_oct = pd.read_csv(pwdOct+"Transformada.txt", header=None).to_numpy()
+# T1_oct = pd.read_csv(pwdOct+"VectorT1.txt", header=None).to_numpy()
+# D_oct = pd.read_csv(pwdOct+"VectorD.txt", header=None).to_numpy()
+# 
+# pwdPet = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Petroleo/'
+# 
+# S_Pet = pd.read_csv(pwdPet+"Transformada.txt", header=None).to_numpy()
+# T1_Pet = pd.read_csv(pwdPet+"VectorT1.txt", header=None).to_numpy()
+# D_Pet = pd.read_csv(pwdPet+"VectorD.txt", header=None).to_numpy()
+# 
+# T1min, T1max = 0, 4
+# Dmin, Dmax = -2, 2
+# 
+# maxi = np.max([T1min, Dmin])
+# mini = np.min([T1max, Dmax])
+# 
+# fig, ax = plt.subplots(dpi=600)
+# 
+# fig.set_size_inches(11/2.54, 10/2.54)
+# # =============================================================================
+# # ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
+# #                   color='black', ls='-', alpha=0.7, zorder=-2, 
+# #                   label = r'$T_1$ = $T_2$')
+# # =============================================================================
+# #Eliminamos los bordes
+# 
+# T1xx = Dxx = 20
+# for i in range(0,Dxx):
+#     S_dode[i,:] = 0
+#     S_dode[-i,:] = 0
+#     S_hept[i,:] = 0
+#     S_hept[-i,:] = 0
+#     S_agua[i,:] = 0
+#     S_agua[-i,:] = 0
+#     S_oct[i,:] = 0
+#     S_oct[-i,:] = 0
+#     S_Pet[i,:] = 0
+#     S_Pet[-i,:] = 0
+# 
+# for i  in range(0,T1xx):
+#     S_dode[:,i] = 0
+#     S_dode[:,-i] = 0
+#     S_hept[:,i] = 0
+#     S_hept[:,-i] = 0
+#     S_agua[:,i] = 0
+#     S_agua[:,-i] = 0
+#     S_oct[:,i] = 0
+#     S_oct[:,-i] = 0
+#     S_Pet[:,i] = 0
+#     S_Pet[:,-i] = 0
+# 
+# #Filtramos
+# # =============================================================================
+# # A_dode = S_dode
+# # valor_umbral = 0.1 * np.max(S_dode)
+# # A_dode[A_dode < valor_umbral] = 0
+# # 
+# # A_agua = S_agua
+# # valor_umbral = 0.1 * np.max(S_agua)
+# # A_agua[A_agua < valor_umbral] = 0
+# # 
+# # A_hept = S_hept
+# # valor_umbral = 0.1 * np.max(S_hept)
+# # A_hept[A_hept < valor_umbral] = 0
+# # 
+# # A_oct = S_oct
+# # valor_umbral = 0.1 * np.max(S_oct)
+# # A_oct[A_oct < valor_umbral] = 0
+# # =============================================================================
+# 
+# A_dode = S_dode/np.max(S_dode)
+# valor_umbral = 0.1 
 # A_dode[A_dode < valor_umbral] = 0
 # 
-# A_agua = S_agua
-# valor_umbral = 0.1 * np.max(S_agua)
+# A_agua = S_agua/np.max(S_agua)
+# valor_umbral = 0.1 
 # A_agua[A_agua < valor_umbral] = 0
 # 
-# A_hept = S_hept
-# valor_umbral = 0.1 * np.max(S_hept)
+# A_hept = S_hept/np.max(S_hept)
+# valor_umbral = 0.1 
 # A_hept[A_hept < valor_umbral] = 0
 # 
-# A_oct = S_oct
-# valor_umbral = 0.1 * np.max(S_oct)
+# A_oct = S_oct/np.max(S_oct)
+# valor_umbral = 0.1  
 # A_oct[A_oct < valor_umbral] = 0
-# =============================================================================
-
-A_dode = S_dode/np.max(S_dode)
-valor_umbral = 0.1 
-A_dode[A_dode < valor_umbral] = 0
-
-A_agua = S_agua/np.max(S_agua)
-valor_umbral = 0.1 
-A_agua[A_agua < valor_umbral] = 0
-
-A_hept = S_hept/np.max(S_hept)
-valor_umbral = 0.1 
-A_hept[A_hept < valor_umbral] = 0
-
-A_oct = S_oct/np.max(S_oct)
-valor_umbral = 0.1  
-A_oct[A_oct < valor_umbral] = 0
-
-A_Pet = S_Pet/np.max(S_Pet)
-valor_umbral = 0.2  
-A_Pet[A_Pet < valor_umbral] = 0
-
-
-#S = S_hept + S_dode + S_agua + S_oct
-
-
-pwdd = 'G:/Unidades compartidas/TF-Andres/Graficos_Finales/'
-
-
-ax.contour(T1_dode[:,0], D_dode[:,0], A_dode.T, 8, cmap= 'Reds_r')
-ax.contour(T1_agua[:,0], D_agua[:,0], A_agua.T, 8, cmap= 'Blues_r')
-ax.contour(T1_hept[:,0], D_hept[:,0], A_hept.T, 8, cmap= 'Greens_r', zorder=1)
-ax.contour(T1_Pet[:,0], D_Pet[:,0], A_Pet.T, 8, cmap= 'Purples_r')
-#ax.contour(T1_oct[:,0], D_oct[:,0], A_oct.T, 8, cmap= 'Wistia_r', zorder=-2)
-ax.contour(T1[:,0], D[:,0], S.T, 8, cmap= 'Wistia_r', zorder=-2)
-
-
-# =============================================================================
-# pendiente = (y2 - y1) / (x2 - x1)
-# ordenada_al_origen = y1 - pendiente * x1
 # 
-# x_range = np.logspace(np.log10(x1), np.log10(x2), 100)
-# y_range = pendiente * x_range + ordenada_al_origen
+# A_Pet = S_Pet/np.max(S_Pet)
+# valor_umbral = 0.2  
+# A_Pet[A_Pet < valor_umbral] = 0
+# 
+# 
+# #S = S_hept + S_dode + S_agua + S_oct
+# 
+# 
+# pwdd = 'G:/Unidades compartidas/TF-Andres/Graficos_Finales/'
+# 
+# 
+# ax.contour(T1_dode[:,0], D_dode[:,0], A_dode.T, 8, cmap= 'Reds_r')
+# ax.contour(T1_agua[:,0], D_agua[:,0], A_agua.T, 8, cmap= 'Blues_r')
+# ax.contour(T1_hept[:,0], D_hept[:,0], A_hept.T, 8, cmap= 'Greens_r', zorder=1)
+# ax.contour(T1_Pet[:,0], D_Pet[:,0], A_Pet.T, 8, cmap= 'Purples_r')
+# #ax.contour(T1_oct[:,0], D_oct[:,0], A_oct.T, 8, cmap= 'Wistia_r', zorder=-2)
+# ax.contour(T1[:,0], D[:,0], S.T, 8, cmap= 'Wistia_r', zorder=-2)
+# 
+# 
+# # =============================================================================
+# # pendiente = (y2 - y1) / (x2 - x1)
+# # ordenada_al_origen = y1 - pendiente * x1
+# # 
+# # x_range = np.logspace(np.log10(x1), np.log10(x2), 100)
+# # y_range = pendiente * x_range + ordenada_al_origen
+# # =============================================================================
+# 
+# #ax.plot([(59.85),x1,x2],[25,y1,y2], linestyle='dashed', color='green', lw=1, scalex=True)
+# 
+# alpha = 0.0001
+# 
+# x1, y1 = 856.87, 0.7
+# x2, y2 = 1380, 2.57
+# x = (np.linspace(10, 10000, 1000))
+# y = (0.000000007)* x**(np.log10(y2/y1)/np.log10(x2/x1))
+# ax.plot(x,y, linestyle='dashed', color='green', lw=1, zorder=-4)
+# ax.plot([1,100000],[2.18,2.18], linestyle='dashed', color='blue', lw=1, zorder=-4)
+# ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
+# #ax.plot([10**(np.log10(x1)),10**(np.log10(x2))], [10**(np.log10(y1)),10**(np.log10(y2))], linestyle='dashed', color='green', lw=2, zorder=-4)
+# #ax.plot(10**np.log10(x),10**np.log10(y), linestyle='dashed', color='green', lw=1, scalex=True)
+# 
+# ax.set_xlabel(r'$T_1$ [ms]')
+# ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
+# ax.set_xlim(10.0**T1min, 10.0**T1max)
+# ax.set_ylim(10.0**Dmin, 10.0**Dmax)
+# ax.set_xscale('log')
+# ax.set_yscale('log')
+# 
+# plt.tick_params(axis='both', which='major', labelsize=10)
+# plt.tick_params(axis='both', which='minor', labelsize=10)
+# plt.savefig(pwdd+"Grafico_grande_todos_160", dpi=160)
+# plt.show()
 # =============================================================================
-
-#ax.plot([(59.85),x1,x2],[25,y1,y2], linestyle='dashed', color='green', lw=1, scalex=True)
-
-alpha = 0.0001
-
-x1, y1 = 856.87, 0.7
-x2, y2 = 1380, 2.57
-x = (np.linspace(10, 10000, 1000))
-y = (0.000000007)* x**(np.log10(y2/y1)/np.log10(x2/x1))
-ax.plot(x,y, linestyle='dashed', color='green', lw=1, zorder=-4)
-ax.plot([1,100000],[2.18,2.18], linestyle='dashed', color='blue', lw=1, zorder=-4)
-ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
-#ax.plot([10**(np.log10(x1)),10**(np.log10(x2))], [10**(np.log10(y1)),10**(np.log10(y2))], linestyle='dashed', color='green', lw=2, zorder=-4)
-#ax.plot(10**np.log10(x),10**np.log10(y), linestyle='dashed', color='green', lw=1, scalex=True)
-
-ax.set_xlabel(r'$T_1$ [ms]')
-ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
-ax.set_xlim(10.0**T1min, 10.0**T1max)
-ax.set_ylim(10.0**Dmin, 10.0**Dmax)
-ax.set_xscale('log')
-ax.set_yscale('log')
-
-plt.tick_params(axis='both', which='major', labelsize=10)
-plt.tick_params(axis='both', which='minor', labelsize=10)
-plt.savefig(pwdd+"Grafico_grande_todos_160", dpi=160)
-plt.show()
 
 
 

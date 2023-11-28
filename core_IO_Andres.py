@@ -61,6 +61,23 @@ def initKernelT1D(nP1, nP2, T1axis, Daxis, T1min, T1max, Dmin, Dmax):
 
     return S0, T1, D, K1, K2
 
+def initKernelT1D_c(nP1, nP2, T1axis, Daxis, T1min, T1max, Dmin, Dmax):
+    '''
+    Initialize variables for Laplace transform.
+    '''
+
+
+    nBinx = nBiny = 200
+    S0 = np.ones((nBinx, nBiny))
+    T1 = np.logspace(T1min, T1max, nBinx)
+    D  = np.logspace(Dmin, Dmax, nBiny) 
+
+
+    K1 = np.exp(- T1axis / T1)
+    K2 = np.exp(- Daxis * D)
+
+    return S0, T1, D, K1, K2
+
 
 def initKernelDT2(nP1, nP2, Daxis, T2axis, Dmin, Dmax, T2min, T2max):
     '''

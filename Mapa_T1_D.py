@@ -12,7 +12,7 @@ import pandas as pd
 # pwd_hept = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/')
 # =============================================================================
 
-pwd = ('G:/Unidades compartidas/TF-Andres/Mediciones/Bentheimer_MojadoDoble/Dodecano231122/inf/231127_T1D_8x8/1/')
+pwd = ('G:/Unidades compartidas/TF-Andres/Mediciones/Bentheimer_MojadoDoble/Dodecano231122/inf/231127_T1D/1/')
 
 #Leemos los archivos necesarios:
 
@@ -25,7 +25,12 @@ param = IO.read_acq(pwd)
 # =============================================================================
 
 Z, T1axis, Daxis = IO.read_T1D(pwd)
+zz = Z
 
+#Tengo que corregir la Z para poder hacer que t1 tambien sea un decaimiento
+for k in range(len(T1axis)):
+    zz[:,k] = -Z[:,k] + Z[-1,k]
+    
 
 nT1, nD = len(T1axis), len(Daxis)
 
@@ -40,10 +45,10 @@ Dxx = 10
 
 tEcho = param['echoTime']
 
-S0, T1, D, K1, K2 = IO.initKernelT1D(nT1, nD, T1axis, Daxis, 
+S0, T1, D, K1, K2 = IO.initKernelT1D_c(nT1, nD, T1axis, Daxis, 
                                      T1min, T1max, Dmin, Dmax)     
 print(f'Starting NLI: Alpha = {alpha}.')
-S, iter = IO.NLI_FISTA_2D(K1, K2, Z, alpha, S0)
+S, iter = IO.NLI_FISTA_2D(K1, K2, zz, alpha, S0)
 if iter < 100000:
     print('Inversion ready!')
 else:
