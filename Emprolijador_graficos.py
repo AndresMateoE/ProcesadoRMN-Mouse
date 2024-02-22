@@ -16,98 +16,25 @@ from scipy.signal import find_peaks
 # DT2
 ########
 
-pwd = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/DT2_Todos/Dodecano/'
-
-S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
-T2 = pd.read_csv(pwd+"VectorT2.txt", header=None).to_numpy()
-D = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
-
-Dmin, Dmax = -1, 1
-T2min, T2max = 1, 4
-
-fig, ax = plt.subplots(dpi=600)
-fig.set_size_inches(10/2.54, 10/2.54)
-maxi = np.max([Dmin, T2min])
-mini = np.min([Dmax, T2max])
-ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
-                  color='black', ls='-', alpha=0.7, zorder=-2)
-
-A = S
-valor_umbral = 0.05* np.max(S)
-A[A < valor_umbral] = 0
-alpha = 0.0001
-
-T1xx = 10
-Dxx = 20
-for i in range(0,Dxx):
-    S[i,:] = 0
-    S[-i,:] = 0
-
-for i  in range(0,T1xx):
-    S[:,i] = 0
-    S[:,-i] = 0
-
-pwdd = 'G:/Unidades compartidas/TF-Andres/Graficos_Finales/'
-
 # =============================================================================
-# indice_maximo = np.unravel_index(np.argmax(S), S.shape)
-# ax.axvline(T2[indice_maximo[0]], color='grey', ls=':', lw=1)
-# ax.axhline(D[indice_maximo[1]], color='grey', ls=':', lw=1)
-# =============================================================================
-
-bounds = np.linspace(0, np.max(S))
-cmap = mpl.cm.magma
-norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
-N=8
-
-ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
-ax.contour(T2[:,0], D[:,0], A, N, vmax=0.004, cmap= cmap)
-
-colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
-              ax=ax, spacing='uniform', pad=0.01, ticks=np.round(np.linspace(0, np.max(S), N), decimals=5))
-              #ax=ax, spacing='uniform', pad=0.01, ticks=np.linspace(0, np.max(S), N))
-colorbar.ax.tick_params(labelsize=5)
-colorbar.minorticks_off()
-
-ax.set_xlabel(r'$T_2$ [ms]', fontsize=10)
-ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
-ax.set_ylim(10.0**Dmin, 10.0**Dmax)
-ax.set_xlim(10.0**T2min, 10.0**T2max)
-ax.set_xscale('log')
-ax.set_yscale('log')
-plt.tick_params(axis='both', which='major', labelsize=10)
-#plt.savefig(pwdd+"Mapa_DT2_Dodecano_p_surf", dpi=600)
-plt.show()
-
-########
-# T1D
-########
-
-# =============================================================================
-# pwd = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
+# pwd = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/DT2_Todos/Dodecano/'
 # 
 # S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
-# T1 = pd.read_csv(pwd+"VectorT1.txt", header=None).to_numpy()
+# T2 = pd.read_csv(pwd+"VectorT2.txt", header=None).to_numpy()
 # D = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
 # 
-# 
-# T1min, T1max = 1, 5
 # Dmin, Dmax = -1, 1
-# 
-# maxi = np.max([T1min, Dmin])
-# mini = np.min([T1max, Dmax])
+# T2min, T2max = 1, 4
 # 
 # fig, ax = plt.subplots(dpi=600)
 # fig.set_size_inches(10/2.54, 10/2.54)
+# maxi = np.max([Dmin, T2min])
+# mini = np.min([Dmax, T2max])
 # ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
-#                   color='black', ls='-', alpha=0.7, zorder=-2, 
-#                   label = r'$T_1$ = $T_2$')
-# alpha = 0.01
-# A = S
-# valor_umbral = 0.05*np.max(S)
-# A[A < valor_umbral] = 0
+#                   color='black', ls='-', alpha=0.7, zorder=-2)
 # 
-# T1xx = 25
+# 
+# T1xx = 10
 # Dxx = 20
 # for i in range(0,Dxx):
 #     S[i,:] = 0
@@ -117,44 +44,118 @@ plt.show()
 #     S[:,i] = 0
 #     S[:,-i] = 0
 # 
-# pwdd = 'G:/Unidades compartidas/TF-Andres/Graficos_Finales/'
+# A = S
+# valor_umbral = 0.1 * np.max(S)
+# A[A < valor_umbral] = 0
+# alpha = 0.001
 # 
-# bounds = np.linspace(0, np.max(S))
-# cmap = mpl.cm.magma
-# norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
-# N=8
+# pwdd = 'G:/Unidades compartidas/TF-Andres/Graficos_Finales/Correcciones/'
 # 
 # # =============================================================================
 # # indice_maximo = np.unravel_index(np.argmax(S), S.shape)
-# # ax.axvline(T1[indice_maximo[0]], color='grey', ls=':', lw=1)
+# # ax.axvline(T2[indice_maximo[0]], color='grey', ls=':', lw=1)
 # # ax.axhline(D[indice_maximo[1]], color='grey', ls=':', lw=1)
 # # =============================================================================
 # 
+# bounds = np.linspace(0, np.max(S))
+# cmap = mpl.cm.Reds_r
+# norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
+# N=8
+# 
 # ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
-# contour = ax.contour(T1[:,0], D[:,0], A.T, N, cmap=cmap)
+# ax.contour(T2[:,0], D[:,0], A, N, vmax=0.004, cmap= cmap)
 # 
 # colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
-#               ax=ax, spacing='uniform', pad=0.01, ticks=np.around(np.linspace(0, np.max(S), N), decimals=4))
-# colorbar.ax.tick_params(labelsize=5)
+#               ax=ax, spacing='uniform', pad=0.01, ticks=np.round(np.linspace(0, np.max(S), N), decimals=5))
+#               #ax=ax, spacing='uniform', pad=0.01, ticks=np.linspace(0, np.max(S), N))
+# colorbar.ax.tick_params(labelsize=8)
 # colorbar.minorticks_off()
 # 
-# x1, y1 = 856.87, 0.7
-# x2, y2 = 1380, 2.57
-# x = (np.linspace(10, 10000, 1000))
-# y = (0.000000007)* x**(np.log10(y2/y1)/np.log10(x2/x1))
-# ax.plot(x,y, linestyle='dashed', color='green', lw=1, zorder=-4)
-# ax.plot([10,100000],[2.18,2.18], linestyle='dashed', color='blue', lw=1, zorder=-4)
-# 
-# ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
+# ax.set_xlabel(r'$T_2$ [ms]', fontsize=10)
 # ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
-# ax.set_xlim(10.0**T1min, 10.0**T1max)
 # ax.set_ylim(10.0**Dmin, 10.0**Dmax)
+# ax.set_xlim(10.0**T2min, 10.0**T2max)
 # ax.set_xscale('log')
 # ax.set_yscale('log')
 # plt.tick_params(axis='both', which='major', labelsize=10)
-# #plt.savefig(pwdd+"Tiempo_inf_8_nuevo", dpi=600, bbox_inches='tight')
+# plt.savefig(pwdd+"Mapa_DT2_Dodecano_rojo", dpi=600, bbox_inches='tight')
 # plt.show()
 # =============================================================================
+
+########
+# T1D
+########
+
+pwd = 'G:/Unidades compartidas/TF-Andres/Mediciones/Bentheimer_MojadoDoble/Dodecano231122/inf/231122_T1D_8x8/10/'
+
+S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
+T1 = pd.read_csv(pwd+"VectorT1.txt", header=None).to_numpy()
+D = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
+
+
+T1min, T1max = 1, 4
+Dmin, Dmax = -1, 1
+
+maxi = np.max([T1min, Dmin])
+mini = np.min([T1max, Dmax])
+
+fig, ax = plt.subplots(dpi=600)
+fig.set_size_inches(10/2.54, 10/2.54)
+ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
+                  color='black', ls='-', alpha=0.7, zorder=-2, 
+                  label = r'$T_1$ = $T_2$')
+alpha = 0.01
+A = S
+valor_umbral = 0.05*np.max(S)
+A[A < valor_umbral] = 0
+
+T1xx = 25
+Dxx = 20
+for i in range(0,Dxx):
+    S[i,:] = 0
+    S[-i,:] = 0
+
+for i  in range(0,T1xx):
+    S[:,i] = 0
+    S[:,-i] = 0
+
+pwdd = 'G:/Unidades compartidas/TF-Andres/Graficos_Finales/Correcciones/'
+
+bounds = np.linspace(0, np.max(S))
+cmap = mpl.cm.magma
+norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
+N=8
+
+# =============================================================================
+# indice_maximo = np.unravel_index(np.argmax(S), S.shape)
+# ax.axvline(T1[indice_maximo[0]], color='grey', ls=':', lw=1)
+# ax.axhline(D[indice_maximo[1]], color='grey', ls=':', lw=1)
+# =============================================================================
+
+ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
+contour = ax.contour(T1[:,0], D[:,0], A.T, N, cmap=cmap)
+
+colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
+              ax=ax, spacing='uniform', pad=0.01, ticks=np.around(np.linspace(0, np.max(S), N), decimals=4))
+colorbar.ax.tick_params(labelsize=8)
+colorbar.minorticks_off()
+
+x1, y1 = 856.87, 0.7
+x2, y2 = 1380, 2.57
+x = (np.linspace(10, 10000, 1000))
+y = (0.000000007)* x**(np.log10(y2/y1)/np.log10(x2/x1))
+ax.plot(x,y, linestyle='dashed', color='green', lw=1, zorder=-4)
+ax.plot([10,100000],[2.18,2.18], linestyle='dashed', color='blue', lw=1, zorder=-4)
+
+ax.set_xlabel(r'$T_1$ [ms]', fontsize=10)
+ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
+ax.set_xlim(10.0**T1min, 10.0**T1max)
+ax.set_ylim(10.0**Dmin, 10.0**Dmax)
+ax.set_xscale('log')
+ax.set_yscale('log')
+plt.tick_params(axis='both', which='major', labelsize=10)
+plt.savefig(pwdd+"T1D_Mojado_inf_8", dpi=600, bbox_inches='tight')
+plt.show()
     
 
 ############
@@ -162,25 +163,25 @@ plt.show()
 ############
 
 # =============================================================================
-# pwdAgua = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/DT2_Todos/Agua/'
+# pwdAgua = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/DT2_Todos/Agua/'
 # 
 # S_agua = pd.read_csv(pwdAgua+"Transformada.txt", header=None).to_numpy()
 # T2_agua = pd.read_csv(pwdAgua+"VectorT2.txt", header=None).to_numpy()
 # D_agua = pd.read_csv(pwdAgua+"VectorD.txt", header=None).to_numpy()
 # 
-# pwdDode = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/DT2_Todos/Dodecano/'
+# pwdDode = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/DT2_Todos/Dodecano/'
 # 
 # S_dode = pd.read_csv(pwdDode+"Transformada.txt", header=None).to_numpy()
 # T2_dode = pd.read_csv(pwdDode+"VectorT2.txt", header=None).to_numpy()
 # D_dode = pd.read_csv(pwdDode+"VectorD.txt", header=None).to_numpy()
 # 
-# pwdHept = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/DT2_Todos/Heptano/'
+# pwdHept = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/DT2_Todos/Heptano/'
 # 
 # S_hept = pd.read_csv(pwdHept+"Transformada.txt", header=None).to_numpy()
 # T2_hept = pd.read_csv(pwdHept+"VectorT2.txt", header=None).to_numpy()
 # D_hept = pd.read_csv(pwdHept+"VectorD.txt", header=None).to_numpy()
 # 
-# pwdOct = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/DT2_Todos/CicloOctano/'
+# pwdOct = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/DT2_Todos/CicloOctano/'
 # 
 # S_Oct = pd.read_csv(pwdOct+"Transformada.txt", header=None).to_numpy()
 # T2_Oct = pd.read_csv(pwdOct+"VectorT2.txt", header=None).to_numpy()
@@ -439,8 +440,8 @@ plt.show()
 # plt.tick_params(axis='both', which='minor', labelsize=10)
 # #plt.savefig(pwdd+"Grafico_Lineas_sin_petroleo", dpi=600)
 # plt.show()
-# 
 # =============================================================================
+
 
 
 
