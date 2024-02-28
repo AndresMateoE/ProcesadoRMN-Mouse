@@ -12,7 +12,7 @@ import pandas as pd
 # pwd_hept = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/')
 # =============================================================================
 
-pwd = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/CicloOctano_2/')
+pwd = ('H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_3000/')
 
 #Leemos los archivos necesarios:
 
@@ -35,13 +35,13 @@ for k in range(len(T1axis)):
 nT1, nD = len(T1axis), len(Daxis)
 
 
-alpha = 0.0001
+alpha = 0.01
 T1min, T1max = 1, 5
 Dmin, Dmax = -1, 1
 
 
-T1xx = 10
-Dxx = 10
+T1xx = 5
+Dxx = 5
 
 tEcho = param['echoTime']
 
@@ -73,8 +73,8 @@ VectorD.to_csv(pwd+"VectorD.txt", index=False, header=False)
 graph.MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd, alpha, T1min, T1max, Dmin, Dmax, T1xx, Dxx)
 graph.PlotT1D_D(Daxis, D, S, pwd, alpha, Dmin, Dmax)
 graph.PlotT1D_T1(T1axis, T1, S, pwd, alpha, T1min, T1max)
-#graph.PlotT1D_T1_NoNorm(T1axis, T1, S, pwd, alpha, T1min, T1max)
-#graph.PlotT1D_D_NoNorm(Daxis, D, S, pwd, alpha, Dmin, Dmax)
+graph.PlotT1D_T1_NoNorm(T1axis, T1, S, pwd, alpha, T1min, T1max)
+graph.PlotT1D_D_NoNorm(Daxis, D, S, pwd, alpha, Dmin, Dmax)
 # CODIGO CHEVA
 
 # =============================================================================
