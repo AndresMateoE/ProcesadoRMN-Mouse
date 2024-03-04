@@ -5,24 +5,10 @@ import pandas as pd
 
 
 #Carpeta con las mediciones
-
-# =============================================================================
-# pwd_agua = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_5000/')
-# pwd_dode = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/')
-# pwd_hept = ('G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/')
-# =============================================================================
-
 pwd = ('H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Agua_3000/')
 
 #Leemos los archivos necesarios:
-
 param = IO.read_acq(pwd)
-# =============================================================================
-# Z_agua, T1axis, Daxis = IO.read_T1D(pwd_agua)
-# Z_hept, _, _ = IO.read_T1D(pwd_hept)
-# Z_dode, _, _ = IO.read_T1D(pwd_dode)
-# Z = Z_dode + Z_agua + Z_hept
-# =============================================================================
 
 Z, T1axis, Daxis = IO.read_T1D(pwd)
 zz = Z
@@ -66,8 +52,6 @@ Transformada.to_csv(pwd+"Transformada.txt", index=False, header=False)
 VectorT1.to_csv(pwd+"VectorT1.txt", index=False, header=False)
 VectorD.to_csv(pwd+"VectorD.txt", index=False, header=False)
 
-
-
 #Graficos
 
 graph.MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd, alpha, T1min, T1max, Dmin, Dmax, T1xx, Dxx)
@@ -75,8 +59,9 @@ graph.PlotT1D_D(Daxis, D, S, pwd, alpha, Dmin, Dmax)
 graph.PlotT1D_T1(T1axis, T1, S, pwd, alpha, T1min, T1max)
 graph.PlotT1D_T1_NoNorm(T1axis, T1, S, pwd, alpha, T1min, T1max)
 graph.PlotT1D_D_NoNorm(Daxis, D, S, pwd, alpha, Dmin, Dmax)
-# CODIGO CHEVA
 
+
+# CODIGO CHEVA
 # =============================================================================
 # MLap_D, MLap_T1 = IO.fitLapMag_DT1(Daxis, Taxis, D, T2, S)
 # params='hola'   
