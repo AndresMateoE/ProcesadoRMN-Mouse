@@ -53,7 +53,7 @@ Dif_dode = np.sum(S_dode, axis=0)
 #Dif_dode = Dif_dode / np.max(Dif_dode)
 
 Dif_oil = np.sum(S_oil, axis=0)
-
+#Dif_oil = Dif_oil / np.max(Dif_oil)
 
 fig, ax = plt.subplots(dpi=600)
 ax.plot(Dax_dode, Dif_dode, label = 'Distrib.', color = 'red')
@@ -83,26 +83,110 @@ ax.set_xlim(10.0**Dmin, 10.0**Dmax)
 plt.show()
 
 # Ahora tengo que hacer los ajustes
-# Defino las funciones
-
-
+# Solo tengo Heptano y Dodecano, asi que con esos dos puntos hago el ajuste para conocer A y B
 
 def D_ajuste(N,a,b):
-    return a * N**(-b-0.7)
+    return A* N**(-b-0.7)
 
-#result = D_ajuste(12,a,b)
-#type(result)
+# =============================================================================
+# params, covariance = curve_fit(D_ajuste, (7,12), (2.55,0.67))
+# a_fit, b_fit = params
+# print(a_fit,b_fit)
+# =============================================================================
 
-params, covariance = curve_fit(D_ajuste, (7,12), (2.55,0.67))
-a_fit, b_fit = params
-print(a_fit,b_fit)
+# =============================================================================
+# fig, ax = plt.subplots(dpi=600)
+# ax.scatter((7,12), (2.55,0.67), label = 'P/ajuste.', color = 'purple', lw=4)
+# ax.plot(np.linspace(0, 40),D_ajuste(np.linspace(0, 40),1,b_fit), color = 'red', zorder=-2)
+# #ax.set_title("Difusión Petroleo")
+# #ax.set_xlabel(r'$D$ [10$^{-9}$ m$^{2}$/s]')
+# #ax.set_xscale('log')
+# ax.set_ylim(-3, 10)
+# ax.set_xlim(5, 40)
+# plt.show()
+# =============================================================================
 
-A, B = 317.80, 1.77
 
+#A, B = 317.80, 1.77
+A, B = 1, 1.77
+v = 0.7
 # Entonces ahora podemos usar esto para armar la otra distribución
+# Primero podemos calcular N media como sugiere el paper y utilizando la distribución de petroleo
 
-def Largo_medio(D,a,b,v):
-    return (a**(1/v)*D**(-1/v))**(v/(v+b))
+D_med = np.mean(Dif_oil)
+N_med = (A**(1/v)*D_med**(-1/v))**(v/(v+B))
+
+# Por último deberia encontrar la distribución de largos de cadena
+# Con todo esto tenemos la relacion DiNi
+
+DiNi = A * N_med**(-B)
+
+N_x = (DiNi / (Dax_oil))**(-1/v)
+N_y = (DiNi / (Dif_oil))**(-1/v)
+
+N_y = N_y / np.max(N_y)
+
+
+fig, ax = plt.subplots(dpi=600)
+ax.plot(N_x, N_y, label = 'Distrib.', color = 'orange')
+ax.set_title("Distribución largo de cadena Petroleo")
+ax.set_xlabel('Largo de cadena')
+#ax.set_ylim(-0.02, 1.2)
+ax.set_xlim(0, 300)
+plt.show()
+
+####################################################################
+
+D_med_dode = np.mean(Dif_dode)
+N_med_dode = (A**(1/v) * D_med_dode**(-1/v))**(v/(v+B))
+
+# Por último deberia encontrar la distribución de largos de cadena
+# Con todo esto tenemos la relacion DiNi
+
+DiNi_dode = A * N_med_dode**(-B)
+
+N_x = (DiNi_dode / (Dax_dode))**(-1/v)
+N_y = (DiNi_dode / (Dif_dode))**(-1/v)
+
+#N_y = N_y / np.max(N_y)
+
+
+fig, ax = plt.subplots(dpi=600)
+ax.plot(N_x, N_y, label = 'Distrib.', color = 'red')
+ax.set_title("Distribución largo de cadena Dodecano")
+ax.set_xlabel('Largo de cadena')
+#ax.set_ylim(-0.02, 1.2)
+ax.set_xlim(0, 40)
+plt.show()
+
+#################################################################################
+
+D_med_hept = np.mean(Dif_hept)
+N_med_hept = (A**(1/v) * D_med_hept**(-1/v))**(v/(v+B))
+
+# Por último deberia encontrar la distribución de largos de cadena
+# Con todo esto tenemos la relacion DiNi
+
+DiNi_hept = A * N_med_hept**(-B)
+
+N_x_hept = (DiNi_hept / (Dax_hept))**(-1/v)
+N_y_hept = (DiNi_hept / (Dif_hept))**(-1/v)
+
+#N_y = N_y / np.max(N_y)
+
+
+fig, ax = plt.subplots(dpi=600)
+ax.plot(N_x_hept, N_y_hept, label = 'Distrib.', color = 'green')
+ax.set_title("Distribución largo de cadena Heptano")
+ax.set_xlabel('Largo de cadena')
+#ax.set_ylim(-0.02, 1.2)
+#ax.set_xlim(0, 20)
+plt.show()
+
+
+
+# def Largo_medio(D,a,b,v):
+    # return (a**(1/v)*D**(-1/v))**(v/(v+b))
 
 
 
