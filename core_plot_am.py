@@ -113,7 +113,7 @@ def MapaDT2(Daxis, T2axis, Z, D, T2, S, pwd,
         S[:,-i] = 0
     #Graficamos
     
-    fig, ax = plt.subplots(dpi=300)
+    fig, ax = plt.subplots(dpi=600)
     fig.set_size_inches(10/2.54, 10/2.54)
     maxi = np.max([Dmin, T2min])
     mini = np.min([Dmax, T2max])
@@ -121,7 +121,7 @@ def MapaDT2(Daxis, T2axis, Z, D, T2, S, pwd,
                       color='black', ls='-', alpha=0.2, zorder=-2)
 
     ax.set_title(rf'$\alpha$ = {alpha}', fontsize=10)
-    ax.contour(T2, D, A.T, 100, cmap= 'inferno')
+    ax.contour(T2, D, A.T, 10, cmap= 'magma')
     ax.set_xlabel(r'$T_2$ [ms]', fontsize=10)
     ax.set_ylabel(r'$D$ [10$^{-9}$ m$^{2}$/s]', fontsize=10)
     ax.set_ylim(10.0**Dmin, 10.0**Dmax)
