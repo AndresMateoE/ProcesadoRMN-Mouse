@@ -10,22 +10,23 @@ import numpy as np
 import matplotlib as mpl
 from scipy.optimize import minimize
 from scipy.optimize import curve_fit
+from scipy.stats import moment
 
 # Primero tengo que cargar los datos, vamos a poder trabajar con Heptano y Dodecano
 
-pwdDode = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
+pwdDode = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
 
 S_dode = pd.read_csv(pwdDode+"Transformada.txt", header=None).to_numpy()
 T1_dode = pd.read_csv(pwdDode+"VectorT1.txt", header=None).to_numpy()
 Dax_dode = pd.read_csv(pwdDode+"VectorD.txt", header=None).to_numpy()
 
-pwdHept = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
+pwdHept = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
 
 S_hept = pd.read_csv(pwdHept+"Transformada.txt", header=None).to_numpy()
 T1_hept = pd.read_csv(pwdHept+"VectorT1.txt", header=None).to_numpy()
 Dax_hept = pd.read_csv(pwdHept+"VectorD.txt", header=None).to_numpy()
 
-pwdPet = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Petroleo/'
+pwdPet = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Petroleo/'
  
 S_oil = pd.read_csv(pwdPet+"Transformada.txt", header=None).to_numpy()
 T1_oil = pd.read_csv(pwdPet+"VectorT1.txt", header=None).to_numpy()
@@ -107,14 +108,16 @@ def D_ajuste(N,a,b):
 # =============================================================================
 
 
-#A, B = 317.80, 1.77
-A, B = 1, 1.77
+A, B = 317.80, 1.77
+#A, B = 1, 1.77
 v = 0.7
 # Entonces ahora podemos usar esto para armar la otra distribución
 # Primero podemos calcular N media como sugiere el paper y utilizando la distribución de petroleo
 
-D_med = np.mean(Dif_oil)
-N_med = (A**(1/v)*D_med**(-1/v))**(v/(v+B))
+
+
+D_med = 1 / np.mean(Dif_oil**(1.42))
+N_med = (A**(1/v)*D_med)**(v/(v+B))
 
 # Por último deberia encontrar la distribución de largos de cadena
 # Con todo esto tenemos la relacion DiNi
@@ -137,18 +140,19 @@ plt.show()
 
 ####################################################################
 
-D_med_dode = np.mean(Dif_dode)
-N_med_dode = (A**(1/v) * D_med_dode**(-1/v))**(v/(v+B))
+D_med_dode = 1 / np.mean(Dif_dode**(1.42))
+#N_med_dode = (A**(1/v) * D_med_dode**(-1/v))**(v/(v+B))
+N_med_dode = (A**(1/v) * D_med_dode)**(v/(v+B))
 
 # Por último deberia encontrar la distribución de largos de cadena
 # Con todo esto tenemos la relacion DiNi
 
 DiNi_dode = A * N_med_dode**(-B)
 
-N_x = (DiNi_dode / (Dax_dode))**(-1/v)
-N_y = (DiNi_dode / (Dif_dode))**(-1/v)
+N_x_dode = (DiNi_dode / (Dax_dode))**(-1/v)
+N_y_dode = (DiNi_dode / (Dif_dode))**(-1/v)
 
-#N_y = N_y / np.max(N_y)
+N_y_dode = N_y_dode / np.max(N_y_dode)
 
 
 fig, ax = plt.subplots(dpi=600)
@@ -156,13 +160,13 @@ ax.plot(N_x, N_y, label = 'Distrib.', color = 'red')
 ax.set_title("Distribución largo de cadena Dodecano")
 ax.set_xlabel('Largo de cadena')
 #ax.set_ylim(-0.02, 1.2)
-ax.set_xlim(0, 40)
+ax.set_xlim(0, 60)
 plt.show()
 
 #################################################################################
 
-D_med_hept = np.mean(Dif_hept)
-N_med_hept = (A**(1/v) * D_med_hept**(-1/v))**(v/(v+B))
+D_med_hept = 1 / np.mean(Dif_hept**(1.42))
+N_med_hept = (A**(1/v) * D_med_hept)**(v/(v+B))
 
 # Por último deberia encontrar la distribución de largos de cadena
 # Con todo esto tenemos la relacion DiNi
@@ -172,7 +176,7 @@ DiNi_hept = A * N_med_hept**(-B)
 N_x_hept = (DiNi_hept / (Dax_hept))**(-1/v)
 N_y_hept = (DiNi_hept / (Dif_hept))**(-1/v)
 
-#N_y = N_y / np.max(N_y)
+N_y_hept = N_y_hept / np.max(N_y_hept)
 
 
 fig, ax = plt.subplots(dpi=600)
