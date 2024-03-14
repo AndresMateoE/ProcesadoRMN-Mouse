@@ -359,3 +359,16 @@ def PlotDT2_D(Daxis, D, S, pwd, alpha, Dmin, Dmax):
     #ax.set_aspect('equal', adjustable='datalim')
     plt.savefig(pwd+"Diff_1D", dpi=600)
     plt.show()
+    
+########### PLots 1-D para distribuciones
+
+def plot_difusion(Daxis, Dif, Dmin, Dmax, Titulo="Titulo", Color="Green"):
+    
+    fig, ax = plt.subplots(dpi=600)
+    ax.plot(Daxis, Dif, label = 'Distrib.', color = Color)
+    ax.set_title(Titulo)
+    ax.set_xlabel(r'$D$ [10$^{-9}$ m$^{2}$/s]')
+    ax.set_xscale('log')
+    #ax.set_ylim(-0.02, 1.2)
+    ax.set_xlim(10.0**Dmin, 10.0**Dmax)
+    plt.show()
