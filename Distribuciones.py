@@ -161,7 +161,7 @@ ax.plot(N_x, N_y, label = 'Distrib.', color = 'red')
 ax.set_title("Distribución largo de cadena Dodecano")
 ax.set_xlabel('Largo de cadena')
 #ax.set_ylim(-0.02, 1.2)
-ax.set_xlim(0, 60)
+ax.set_xlim(0, 20)
 plt.show()
 
 #################################################################################
