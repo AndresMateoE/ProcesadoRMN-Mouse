@@ -31,9 +31,8 @@ S_oil = pd.read_csv(pwdPet+"Transformada.txt", header=None).to_numpy()
 T1_oil = pd.read_csv(pwdPet+"VectorT1.txt", header=None).to_numpy()
 Dax_oil = pd.read_csv(pwdPet+"VectorD.txt", header=None).to_numpy()
 
-Dmin = -1
-Dmax = 1
-Dxx = 10
+Dmin, Dmax, Dxx = -1, 1, 10
+
 for i in range(0,Dxx):
     S_dode[i,:] = 0
     S_dode[-i,:] = 0
@@ -52,9 +51,21 @@ Dif_oil = np.sum(S_oil, axis=0)
 #Dif_oil = Dif_oil / np.max(Dif_oil)
 
 
-graph.plot_difusion(Dax_dode, Dif_dode, Dmin, Dmax, "Difusión Dodecano", "Red")
+# graph.plot_difusion(Dax_dode, Dif_dode, Dmin, Dmax, "Difusión Dodecano", "Red")
     
-    
+
+# Son 3, 6, 15 y 30 nm
+
+Deff_n5 = np.array([0.25, 2.02, 3.5, 4.0])
+Deff_n7 = np.array([0.11, 1.05, 1.98, 2.16])
+Deff_c6 = np.array([0.042, 0.51, 1.02, 1.05])
+
+def D_ajuste(N,a,b):
+    return a* N**(-b-0.7)
+
+params, covariance = curve_fit(D_ajuste, (5,7), (Deff_n5[0],Deff_n7[0]))
+a_fit, b_fit = params
+print(a_fit,b_fit)
     
     
     

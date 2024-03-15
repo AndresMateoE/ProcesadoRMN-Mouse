@@ -11,22 +11,23 @@ import matplotlib as mpl
 from scipy.optimize import minimize
 from scipy.optimize import curve_fit
 from scipy.stats import moment
+import core_plot_am as graph
 
 # Primero tengo que cargar los datos, vamos a poder trabajar con Heptano y Dodecano
 
-pwdDode = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
+pwdDode = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
 
 S_dode = pd.read_csv(pwdDode+"Transformada.txt", header=None).to_numpy()
 T1_dode = pd.read_csv(pwdDode+"VectorT1.txt", header=None).to_numpy()
 Dax_dode = pd.read_csv(pwdDode+"VectorD.txt", header=None).to_numpy()
 
-pwdHept = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
+pwdHept = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Heptano/'
 
 S_hept = pd.read_csv(pwdHept+"Transformada.txt", header=None).to_numpy()
 T1_hept = pd.read_csv(pwdHept+"VectorT1.txt", header=None).to_numpy()
 Dax_hept = pd.read_csv(pwdHept+"VectorD.txt", header=None).to_numpy()
 
-pwdPet = 'G:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Petroleo/'
+pwdPet = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Petroleo/'
  
 S_oil = pd.read_csv(pwdPet+"Transformada.txt", header=None).to_numpy()
 T1_oil = pd.read_csv(pwdPet+"VectorT1.txt", header=None).to_numpy()
@@ -87,7 +88,7 @@ plt.show()
 # Solo tengo Heptano y Dodecano, asi que con esos dos puntos hago el ajuste para conocer A y B
 
 def D_ajuste(N,a,b):
-    return A* N**(-b-0.7)
+    return a* N**(-b-0.7)
 
 # =============================================================================
 # params, covariance = curve_fit(D_ajuste, (7,12), (2.55,0.67))
@@ -187,7 +188,7 @@ ax.set_xlabel('Largo de cadena')
 #ax.set_xlim(0, 20)
 plt.show()
 
-
+graph.plot_cadena(N_x_hept, N_y_hept, 30, 'Heptano', 'green')
 
 # def Largo_medio(D,a,b,v):
     # return (a**(1/v)*D**(-1/v))**(v/(v+b))

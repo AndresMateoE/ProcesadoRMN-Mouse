@@ -372,3 +372,15 @@ def plot_difusion(Daxis, Dif, Dmin, Dmax, Titulo="Titulo", Color="Green"):
     #ax.set_ylim(-0.02, 1.2)
     ax.set_xlim(10.0**Dmin, 10.0**Dmax)
     plt.show()
+    
+    
+    
+def plot_cadena(N_x,N_y,x_max=100, Alcano="Alcano", Color = 'red'):
+    
+    fig, ax = plt.subplots(dpi=600)
+    ax.plot(N_x, N_y, label = 'Distrib.', color = Color)
+    ax.set_title(rf'Distribución largo de cadena {Alcano}')
+    ax.set_xlabel('Largo de cadena')
+    #ax.set_ylim(-0.02, 1.2)
+    ax.set_xlim(0, x_max)
+    plt.show()
