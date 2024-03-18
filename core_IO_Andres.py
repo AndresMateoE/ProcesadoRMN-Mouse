@@ -11,7 +11,18 @@ from scipy.optimize import curve_fit
 ###############################################################################
 ########################### COSAS VARIAS
 ###############################################################################
-
+def read_dif(pwd, Dxx):
+    S = pd.read_csv(pwd+"Transformada.txt", header=None).to_numpy()
+    T1ax = pd.read_csv(pwd+"VectorT1.txt", header=None).to_numpy()
+    Dax = pd.read_csv(pwd+"VectorD.txt", header=None).to_numpy()
+    
+    for i in range(0,Dxx):
+        S[i,:] = 0
+        S[-i,:] = 0
+    
+    Dif = np.sum(S, axis=0)
+    
+    return Dif, S, Dax, T1ax
 
 def read_acq(pwd):
     
