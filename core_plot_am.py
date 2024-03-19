@@ -61,11 +61,9 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
     fig, ax = plt.subplots(dpi=600)
     fig.set_size_inches(10/2.54, 10/2.54)
     
-# =============================================================================
-#     ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
-#                       color='black', ls='-', alpha=0.7, zorder=-2, 
-#                       label = r'$T_1$ = $T_2$')
-# =============================================================================
+    ax.plot([10.0**mini, 10.0**maxi], [10.0**mini, 10.0**maxi], 
+                      color='black', ls='-', alpha=0.7, zorder=-2, 
+                      label = r'$T_1$ = $T_2$')
     bounds = np.linspace(0, np.max(S))
     cmap = mpl.cm.magma
     norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
@@ -88,10 +86,12 @@ def MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd,
     ax.set_yscale('log')
 #    ax.set_aspect('equal', adjustable='datalim')
     plt.tick_params(axis='both', which='major', labelsize=10)
-    colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
-                  ax=ax, spacing='uniform', pad=0.01, ticks=np.around(np.linspace(0, np.max(S), N), decimals=4))
-    colorbar.ax.tick_params(labelsize=5)
-    colorbar.minorticks_off()
+# =============================================================================
+#     colorbar = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
+#                   ax=ax, spacing='uniform', pad=0.01, ticks=np.around(np.linspace(0, np.max(S), N), decimals=4))
+#     colorbar.ax.tick_params(labelsize=5)
+#     colorbar.minorticks_off()
+# =============================================================================
     plt.savefig(pwd+"Mapa_T1D", dpi=600)
     plt.show()
     
