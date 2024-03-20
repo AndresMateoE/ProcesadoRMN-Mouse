@@ -5,7 +5,7 @@ import pandas as pd
 
 
 #Carpeta con las mediciones
-pwd = ('H:/Unidades compartidas/TF-Andres/Mediciones/CicloOctano_Bentheimer/231113/231113_T1D/1/')
+pwd = ('H:/Unidades compartidas/TF-Andres/Mediciones/Bentheimer_nOctano/240319_T1D/10/')
 
 #Leemos los archivos necesarios:
 param = IO.read_acq(pwd)
@@ -55,8 +55,8 @@ VectorD.to_csv(pwd+"VectorD.txt", index=False, header=False)
 #Graficos
 
 graph.MapaT1D(T1axis, Daxis, Z, T1, D, S, pwd, alpha, T1min, T1max, Dmin, Dmax, T1xx, Dxx)
-#graph.PlotT1D_D(Daxis, D, S, pwd, alpha, Dmin, Dmax)
-#graph.PlotT1D_T1(T1axis, T1, S, pwd, alpha, T1min, T1max)
+graph.PlotT1D_D(Daxis, D, S, pwd, alpha, Dmin, Dmax)
+graph.PlotT1D_T1(T1axis, T1, S, pwd, alpha, T1min, T1max)
 #graph.PlotT1D_T1_NoNorm(T1axis, T1, S, pwd, alpha, T1min, T1max)
 #graph.PlotT1D_D_NoNorm(Daxis, D, S, pwd, alpha, Dmin, Dmax)
 
