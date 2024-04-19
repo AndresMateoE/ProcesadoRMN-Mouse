@@ -14,7 +14,7 @@ from scipy.stats import moment
 import core_plot_am as graph
 
 # Primero tengo que cargar los datos, vamos a poder trabajar con Heptano y Dodecano
-
+#holaaa
 pwdDode = 'H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/T1D_Todos/Dodecano/'
 
 S_dode = pd.read_csv(pwdDode+"Transformada.txt", header=None).to_numpy()
