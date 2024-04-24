@@ -16,25 +16,25 @@ from scipy.signal import find_peaks
 
 #(Daxis, D, S, pwd, alpha, Dmin, Dmax)
 
-pwd1659 = 'G:/Unidades compartidas/TF-Andres/Mediciones/Dodecano_Bentheimer/Dodecano_Bentheimer/231002/Mojado_Agua/1659/231002_T1D/1/'
+pwd1659 = 'H:/Unidades compartidas/TF-Andres/Mediciones/Dodecano_Bentheimer/Dodecano_Bentheimer/231002/Mojado_Agua/1659/231002_T1D/1/'
 
 S_1659 = pd.read_csv(pwd1659+"Transformada.txt", header=None).to_numpy()
 T1_1659 = pd.read_csv(pwd1659+"VectorT1.txt", header=None).to_numpy()
 D_1659 = pd.read_csv(pwd1659+"VectorD.txt", header=None).to_numpy()
 
-pwd1544 = 'G:/Unidades compartidas/TF-Andres/Mediciones/Dodecano_Bentheimer/Dodecano_Bentheimer/231002/Mojado_Agua/1544/231002_T1D/1/'
+pwd1544 = 'H:/Unidades compartidas/TF-Andres/Mediciones/Dodecano_Bentheimer/Dodecano_Bentheimer/231002/Mojado_Agua/1544/231002_T1D/1/'
 
 S_1544 = pd.read_csv(pwd1544+"Transformada.txt", header=None).to_numpy()
 T1_1544 = pd.read_csv(pwd1544+"VectorT1.txt", header=None).to_numpy()
 D_1544 = pd.read_csv(pwd1544+"VectorD.txt", header=None).to_numpy()
 
-pwd1358 = 'G:/Unidades compartidas/TF-Andres/Mediciones/Dodecano_Bentheimer/Dodecano_Bentheimer/231002/Mojado_Agua/1358/231002_T1D/1/'
+pwd1358 = 'H:/Unidades compartidas/TF-Andres/Mediciones/Dodecano_Bentheimer/Dodecano_Bentheimer/231002/Mojado_Agua/1358/231002_T1D/1/'
 
 S_1358 = pd.read_csv(pwd1358+"Transformada.txt", header=None).to_numpy()
 T1_1358 = pd.read_csv(pwd1358+"VectorT1.txt", header=None).to_numpy()
 D_1358 = pd.read_csv(pwd1358+"VectorD.txt", header=None).to_numpy()
 
-pwd1152 = 'G:/Unidades compartidas/TF-Andres/Mediciones/Dodecano_Bentheimer/Dodecano_Bentheimer/231002/Mojado_Agua/1152/231002_T1D/1/'
+pwd1152 = 'H:/Unidades compartidas/TF-Andres/Mediciones/Dodecano_Bentheimer/Dodecano_Bentheimer/231002/Mojado_Agua/1152/231002_T1D/1/'
 
 S_1152 = pd.read_csv(pwd1152+"Transformada.txt", header=None).to_numpy()
 T1_1152 = pd.read_csv(pwd1152+"VectorT1.txt", header=None).to_numpy()
