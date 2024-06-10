@@ -5,17 +5,17 @@ import core_plot_am as graph
 import pandas as pd
 
 #Carpeta con las mediciones
-pwd = ('H:/Unidades compartidas/TF-Andres/Mediciones/Mediciones finales/DT2_Todos/Dodecano/')
+pwd = ('H:/Unidades compartidas/TF-Andres/2024-Dif-T1/Mediciones/DT2_Todos/CicloOctano/')
 #Leemos los archivos necesarios:
 param = IO.read_acq(pwd)
 Z, Daxis, T2axis = IO.read_DT2(pwd)
 
 nT2, nD = len(T2axis), len(Daxis)
 
-alpha = 0.0001
+alpha = 0.01
 Dmin, Dmax = -1, 1
 T2min, T2max = 1, 4
-T2xx = Dxx = 5
+T2xx = Dxx = 3
 
 tEcho = param['echoTime']
 S0, D, T2, K1, K2 = IO.initKernelDT2(nD, nT2, Daxis, T2axis, 
