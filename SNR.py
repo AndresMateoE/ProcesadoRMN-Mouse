@@ -7,8 +7,6 @@ Created on Tue Jun 25 11:30:44 2024
 
 import numpy as np
 import core_IO_Andres as IO
-import core_plot_am as graph
-import pandas as pd
 import matplotlib.pyplot as plt
 
 pwdT2 = ('H:/Unidades compartidas/TF-Andres/2024-Dif-T1/Mediciones/DT2_Todos/Agua/')
@@ -29,12 +27,14 @@ print(SNRT2)
 print(SNRT1)
 
 
-fig, axs = plt.subplots()
-axs.plot(T2axis, T2, label = 'Distrib.', color = 'teal')
-axs.set_xlabel(r'$Tiempo$ [ms]')
-plt.show()
-
-fig, axs = plt.subplots()
-axs.plot(T1axis, T1, label = 'Distrib.', color = 'teal')
-axs.set_xlabel(r'$Tiempo$ [ms]')
-plt.show()
+# =============================================================================
+# fig, axs = plt.subplots()
+# axs.plot(T2axis, T2, label = 'Distrib.', color = 'teal')
+# axs.set_xlabel(r'$Tiempo$ [ms]')
+# plt.show()
+# 
+# fig, axs = plt.subplots()
+# axs.plot(T1axis, T1, label = 'Distrib.', color = 'teal')
+# axs.set_xlabel(r'$Tiempo$ [ms]')
+# plt.show()
+# =============================================================================
