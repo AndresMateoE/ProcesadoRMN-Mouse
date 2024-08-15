@@ -5,7 +5,7 @@ import core_plot_am as graph
 import pandas as pd
 
 #Carpeta con las mediciones
-pwd = ('H:/Unidades compartidas/TF-Andres/2024-Dif-T1/Mediciones/DT2_Todos/CicloOctano/')
+pwd = ('H:/Unidades compartidas/TF-Andres/2024/kerosene_bulk/240812_DT2/1/')
 #Leemos los archivos necesarios:
 param = IO.read_acq(pwd)
 Z, Daxis, T2axis = IO.read_DT2(pwd)

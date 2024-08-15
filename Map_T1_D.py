@@ -5,7 +5,7 @@ import pandas as pd
 
 
 #Carpeta con las mediciones
-pwd = ('H:/Unidades compartidas/TF-Andres/2024-Dif-T1/Mediciones/Bentheimer_nOctano/240319_T1D/10/')
+pwd = ('H:/Unidades compartidas/TF-Andres/2024/kerosene_bulk/240812_T1D/1/')
 
 #Leemos los archivos necesarios:
 param = IO.read_acq(pwd)
